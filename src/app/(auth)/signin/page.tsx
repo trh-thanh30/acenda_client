@@ -1,14 +1,12 @@
-import Image from "next/image";
-import imgHouse from "../../../../public/img.jpg";
-
 import Link from "next/link";
 import FormSignIn from "@/components/Form/FormSignIn";
 import Logo from "@/components/Logo";
+import ImageAuth from "@/components/ImageAuth";
 
 export default function Page() {
   return (
     <>
-      <div key="form" className="flex flex-col p-10 mb-5">
+      <div key="form" className="flex flex-col p-10 mb-2">
         <Logo />
         <div className="flex flex-col mt-4 border border-slate-200 rounded-md p-4">
           <h1 className="mt-2 text-4xl text-center text-slate-900 font-medium">
@@ -31,16 +29,8 @@ export default function Page() {
           </p>
         </div>
       </div>
-
-      <div key="image" className="">
-        <Image
-          src={imgHouse}
-          alt="view"
-          loading="lazy"
-          // width={500}
-
-          className="object-cover w-full"></Image>
-      </div>
+      {/* Image */}
+      <ImageAuth />
     </>
   );
 }

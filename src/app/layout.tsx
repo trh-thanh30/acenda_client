@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
+import { Toaster } from "react-hot-toast";
 // Import ShopeeDisplay font family
 const shopeeDisplay = localFont({
   src: [
@@ -51,6 +52,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${shopeeDisplay.variable}`}>
+      <Toaster
+        position="top-center"
+        gutter={12}
+        containerStyle={{ margin: "4px" }}
+        toastOptions={{
+          success: { duration: 3000 },
+          error: { duration: 4000 },
+          style: {
+            fontSize: "14px",
+            fontWeight: "500",
+            color: "#202C46",
+            textWrap: "nowrap",
+            maxWidth: "400px",
+            padding: "14px 20px",
+          },
+        }}
+      />
       <body className="antialiased min-h-screen font-sans">{children}</body>
     </html>
   );

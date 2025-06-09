@@ -11,7 +11,7 @@ export default function MainLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="grid grid-cols-[1fr_0.8fr] h-screen overflow-hidden">
+    <main className="grid grid-cols-[1fr_0.8fr] h-screen overflow-y-scroll">
       {children}
     </main>
   );
