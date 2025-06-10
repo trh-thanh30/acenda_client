@@ -69,7 +69,7 @@ export default function RootLayout({
           },
         }}
       />
-      <body className="antialiased min-h-screen font-sans">{children}</body>
+      <body className="antialiased min-h-screen font-sans bg-doveGray-50">{children}</body>
     </html>
   );
 }
