@@ -15,7 +15,7 @@ import NavLink from "../NavLink";
 
 export default function Header() {
   return (
-    <header className="">
+    <header>
       {/* Introduce */}
       <section className="-mx-12 py-3 px-12 bg-midnightBlue-950">
         <div className="flex items-center justify-between">
@@ -40,7 +40,7 @@ export default function Header() {
         </div>
       </section>
       {/* Navigation */}
-      <section className="flex justify-between items-center py-2">
+      <section className="flex justify-between items-center py-3">
         <Logo />
         <nav className="flex items-center justify-center gap-6">
           <NavLink href="/">HOMEPAGE</NavLink>

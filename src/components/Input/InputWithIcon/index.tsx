@@ -66,7 +66,7 @@ export default function InputWithIcon({
           placeholder={placeholder}
           value={value}
           {...register(id)}
-          className={`w-full pl-14 border-2 rounded-md p-2 outline-none text-sm transition-colors
+          className={`w-full pl-12 border-2 rounded-md p-2 outline-none text-sm transition-colors
                     ${
                       error
                         ? "border-red-200 focus:border-red-300 placeholder:text-red-400"
