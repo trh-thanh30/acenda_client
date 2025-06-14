@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
 import { Toaster } from "react-hot-toast";
+import StoreProvider from "./StoreProvider";
 // Import ShopeeDisplay font family
 const shopeeDisplay = localFont({
   src: [
@@ -69,7 +70,9 @@ export default function RootLayout({
           },
         }}
       />
-      <body className="antialiased min-h-screen font-sans bg-doveGray-50">{children}</body>
+      <body className="antialiased min-h-screen font-sans bg-doveGray-50">
+        <StoreProvider>{children}</StoreProvider>
+      </body>
     </html>
   );
 }

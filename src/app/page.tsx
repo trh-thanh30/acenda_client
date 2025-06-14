@@ -1,52 +1,93 @@
 import Thumbnail from "@/components/ui/Thumbnail";
 import MainLayout from "./(main)/layout";
-
-import notifiIC from "@/../public/notifi.svg";
-import chatIC from "@/../public/chat.svg";
-import pinMapIC from "@/../public/pin-map.svg";
+import Step from "@/components/ui/Step";
+import TourItem from "@/components/ui/TourItem";
 import Image from "next/image";
+
+import contactIMG from "@/../public/contact.png";
+import tickYesIC from "@/../public/tick-yes.svg";
+
+import Link from "next/link";
+import { RxArrowTopRight } from "react-icons/rx";
+import HotelItem from "@/components/ui/HotelItem";
+
 export default function Home() {
   return (
     <MainLayout>
       <Thumbnail />
-      <div className="mt-36 text-center">
-        <span className="text-2xl text-smaltBlue-500 font-medium">
-          3 STEPS TO A PERFECT TRIP
-        </span>
-        <h3 className="font-bold text-3xl text-midnightBlue-950 uppercase mt-2">
-          Find the ride for you
-        </h3>
-        <div className="mt-20 flex items-center justify-between">
-          <div className="flex flex-col items-center">
-            <Image src={notifiIC} alt="notification icon" />
-            <h4 className="text-2xl text-midnightBlue-950 font-medium">
-              Tell us what you want to do?
-            </h4>
-            <p className="text-sm text-doveGray-500">
-              Lorem Ipsum is that it has a more-or-less normal distribution of
-              letters, as opposed to using
+      <Step />
+      <div className="mt-16">
+        <h4 className="text-3xl text-midnightBlue-950 font-semibold uppercase">
+          hot deals today
+        </h4>
+        <div className="grid grid-cols-5 gap-4 items-center h-full mt-10">
+          <TourItem />
+        </div>
+      </div>
+
+      <div className="mt-16 text-center">
+        <h5 className="text-xl font-medium text-smaltBlue-500 ani">
+          QUALITY AND REPUTATION ARE TOP PRIORITIES
+        </h5>
+        <h4 className="text-3xl text-midnightBlue-950 font-semibold uppercase">
+          cooperate with us
+        </h4>
+        <div className="flex justify-between items-center mt-7">
+          <section>
+            <p className="flex items-center gap-1 text-base text-midnightBlue-950">
+              <Image width={14} src={tickYesIC} alt="tick icon" />
+              Sign up completely free in 15 minutes
             </p>
-          </div>
-          <div className="flex flex-col items-center">
-            <Image src={pinMapIC} alt="notification icon" />
-            <h4 className="text-2xl text-midnightBlue-950 font-medium">
-              Share your travel destination
-            </h4>
-            <p className="text-sm text-doveGray-500">
-              Lorem Ipsum is that it has a more-or-less normal distribution of
-              letters, as opposed to using
+            <p className="flex items-center gap-1 text-base text-midnightBlue-950 my-4">
+              <Image width={14} src={tickYesIC} alt="tick icon" />
+              Reach millions of potential customers
             </p>
-          </div>
-          <div className="flex flex-col items-center">
-            <Image src={chatIC} alt="notification icon" />
-            <h4 className="text-2xl text-midnightBlue-950 font-medium">
-              Share your travel interests
-            </h4>
-            <p className="text-sm text-doveGray-500">
-              Lorem Ipsum is that it has a more-or-less normal distribution of
-              letters, as opposed to using
+            <p className="flex items-center gap-1 text-base text-midnightBlue-950">
+              <Image width={14} src={tickYesIC} alt="tick icon" />
+              Easy to manage anywhere
             </p>
-          </div>
+            <div className="flex items-center mt-10">
+              <div className="flex flex-col gap-1 border-r border-doveGray-200 pr-4">
+                <h6 className="text-primary-500 text-6xl font-semibold">
+                  20k+
+                </h6>
+                <p className="text-sm text-doveGray-400">
+                  Travel service providers, restaurants
+                </p>
+              </div>
+              <div className="flex flex-col gap-1 pl-4">
+                <h6 className="text-primary-500 text-6xl font-semibold">
+                  20k+
+                </h6>
+                <p className="text-sm text-doveGray-400">
+                  Travel service providers, restaurants
+                </p>
+              </div>
+            </div>
+          </section>
+          <Image
+            className="object-cover bg-midnightBlue-100 rounded-full"
+            width={436}
+            src={contactIMG}
+            alt="chat icon"
+          />
+        </div>
+      </div>
+
+      <div className="mt-16">
+        <div className="flex items-center justify-between">
+          <h4 className="uppercase text-3xl text-midnightBlue-950 font-semibold">
+            resort travel
+          </h4>
+          <Link
+            href="/tours"
+            className="text-doveGray-0 text-sm bg-primary-500 py-2 px-6 hover:opacity-95 rounded-md flex items-center gap-1">
+            See more tours
+            <RxArrowTopRight />
+          </Link>
+        </div>
+        <div className="mt-7 grid grid-cols-5 gap-4 mb-10">
+          <HotelItem />
         </div>
       </div>
     </MainLayout>

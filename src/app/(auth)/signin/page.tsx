@@ -19,11 +19,11 @@ export default function Page() {
           <p className="text-sm whitespace-nowrap mt-2 text-center hover:underline py-1 hover:cursor-pointer">
             Forget your password
           </p>
-          <p className="text-sm whitespace-nowrap mt-4 text-center py-1 ">
+          <p className="text-sm whitespace-nowrap mt-4 text-center py-1 text-doveGray-500">
             Don&apos;t have an account yet?{" "}
             <Link
               href="/signup"
-              className=" hover:underline hover:cursor-pointer font-medium">
+              className=" underline hover:cursor-pointer font-medium text-doveGray-900">
               Sign Up
             </Link>
           </p>
