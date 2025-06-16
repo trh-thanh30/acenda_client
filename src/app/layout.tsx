@@ -52,26 +52,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${shopeeDisplay.variable}`}>
-      <Toaster
-        position="top-center"
-        gutter={12}
-        containerStyle={{ margin: "4px" }}
-        toastOptions={{
-          success: { duration: 3000 },
-          error: { duration: 4000 },
-          style: {
-            fontSize: "14px",
-            fontWeight: "500",
-            color: "#202C46",
-            textWrap: "nowrap",
-            maxWidth: "400px",
-            padding: "14px 20px",
-          },
-        }}
-      />
-      <body className="antialiased min-h-screen font-sans bg-doveGray-50">
-        <StoreProvider>{children}</StoreProvider>
+    <html lang="en" className={`${shopeeDisplay.variable} overflow-x-hidden`}>
+      <body className="antialiased min-h-screen font-sans bg-doveGray-50 w-full ">
+        <StoreProvider>
+          <Toaster
+            position="top-center"
+            gutter={12}
+            containerStyle={{ margin: "4px" }}
+            toastOptions={{
+              success: { duration: 3000 },
+              error: { duration: 4000 },
+              style: {
+                fontSize: "14px",
+                fontWeight: "500",
+                color: "#202C46",
+                textWrap: "nowrap",
+                maxWidth: "400px",
+                padding: "14px 20px",
+              },
+            }}
+          />
+          {children}
+        </StoreProvider>
       </body>
     </html>
   );

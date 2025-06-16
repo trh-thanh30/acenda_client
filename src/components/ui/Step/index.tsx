@@ -7,17 +7,21 @@ import pinMapIC from "@/../public/pin-map.svg";
 
 export default function Step() {
   return (
-    <div className="mt-36 text-center">
-      <span className="text-2xl text-smaltBlue-500 font-medium">
+    <div className="md:mt-36 mt-9 text-center">
+      <span className="md:text-2xl text-xl text-smaltBlue-500 font-medium">
         3 STEPS TO A PERFECT TRIP
       </span>
-      <h3 className="font-bold text-3xl text-midnightBlue-950 uppercase mt-2">
+      <h3 className="font-bold md:text-3xl text-2xl text-midnightBlue-950 uppercase mt-2">
         Find the ride for you
       </h3>
-      <div className="mt-20 flex items-center gap-20">
+      <div className="md:mt-20 mt-6 flex items-center md:flex-row flex-col md:gap-20 gap-6">
         <div className="flex flex-col items-center">
-          <Image src={notifiIC} alt="notification icon" />
-          <h4 className="text-2xl text-midnightBlue-950 font-medium">
+          <Image
+            src={notifiIC}
+            alt="notification icon"
+            className="md:w-20 md:h-20 w-16 h-16 object-cover"
+          />
+          <h4 className="md:text-2xl text-xl text-midnightBlue-950 font-medium">
             Tell us what you want to do?
           </h4>
           <p className="text-sm text-doveGray-500">
@@ -26,8 +30,12 @@ export default function Step() {
           </p>
         </div>
         <div className="flex flex-col items-center">
-          <Image src={pinMapIC} alt="notification icon" />
-          <h4 className="text-2xl text-midnightBlue-950 font-medium">
+          <Image
+            src={pinMapIC}
+            alt="notification icon"
+            className="md:w-20 md:h-20 w-16 h-16 object-cover"
+          />
+          <h4 className="md:text-2xl text-xl text-midnightBlue-950 font-medium">
             Share your travel destination
           </h4>
           <p className="text-sm text-doveGray-500">
@@ -36,8 +44,12 @@ export default function Step() {
           </p>
         </div>
         <div className="flex flex-col items-center">
-          <Image src={chatIC} alt="notification icon" />
-          <h4 className="text-2xl text-midnightBlue-950 font-medium">
+          <Image
+            src={chatIC}
+            alt="notification icon"
+            className="md:w-20 md:h-20 w-16 h-16 object-cover"
+          />
+          <h4 className="md:text-2xl text-xl text-midnightBlue-950 font-medium">
             Share your travel interests
           </h4>
           <p className="text-sm text-doveGray-500">

@@ -5,6 +5,7 @@ interface ButtonBorderProps {
   isValid: boolean;
   loading?: boolean;
   text: string;
+  
 }
 
 export default function ButtonBorder({
@@ -16,7 +17,7 @@ export default function ButtonBorder({
     <button
       type="submit"
       disabled={!isValid}
-      className={`text-base rounded-full py-2 px-8 font-medium transition-colors border
+      className={`md:text-base text-sm rounded-full py-2 px-8 font-medium transition-colors border
                   ${
                     isValid
                       ? "border-primary-500 hover:bg-primary-500 text-primary-500 hover:shadow-primary-300 hover:shadow-2xl hover:cursor-pointer hover:text-white"

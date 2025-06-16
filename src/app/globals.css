@@ -1,10 +1,10 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+
 body {
   font-family: var(--font-shopee);
 }
-@theme inline {
-    
+@theme {
   /* Primary colors */
   --color-primary-50: #fef4f2;
   --color-primary-100: #fee7e2;

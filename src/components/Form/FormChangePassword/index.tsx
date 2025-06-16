@@ -2,7 +2,12 @@
 "use client";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { AiOutlineCode, AiOutlineIdcard } from "react-icons/ai";
+import {
+  AiOutlineCode,
+  AiOutlineIdcard,
+  AiOutlineKey,
+  AiOutlineLock,
+} from "react-icons/ai";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -12,15 +17,19 @@ import ButtonBorder from "@/components/Button/ButtonBorder";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import api from "@/lib/axios";
+import useShowPassword from "@/hooks/useShowPassword";
 
 const schema = z.object({
   id: z.string().nonempty("ID is required"),
   code: z.string().nonempty("Code is required"),
+  password: z.string().nonempty("New password is required"),
+  confirmPassword: z.string().nonempty("Confirm password is required"),
 });
 
 type FormData = z.infer<typeof schema>;
-export default function FormActiveUser({ userId }: { userId: string }) {
+export default function FormChangePassword({ userId }: { userId: string }) {
   const [loading, setLoading] = useState<boolean>(false);
+  const { handleShowPassword, showPassword } = useShowPassword();
   const router = useRouter();
   const {
     register,
@@ -33,23 +42,7 @@ export default function FormActiveUser({ userId }: { userId: string }) {
   const onSubmit = async (data: FormData) => {
     const { id, code } = data;
     try {
-      setLoading(true);
-      const res = await api.post("/auth/active", {
-        id,
-        code,
-      });
-      if (res.status === 201) {
-        toast.success(res.data?.message);
-        setLoading(false);
-        router.push("/signin");
-      }
-    } catch (error: any) {
-      const message =
-        error.response?.data?.message ||
-        "Something went wrong. Please try again.";
-      setLoading(false);
-      toast.error(message);
-    }
+    } catch (error) {}
   };
   return (
     <div className="mt-2">
@@ -79,10 +72,33 @@ export default function FormActiveUser({ userId }: { userId: string }) {
           register={register}
           icon={<AiOutlineCode />}
         />
+
+        <InputWithIcon
+          label="New Password"
+          id="password"
+          type={showPassword ? "text" : "password"}
+          handleShowPassword={handleShowPassword}
+          placeholder={"Enter new password"}
+          error={errors.password}
+          errorMessage={errors.password?.message}
+          register={register}
+          icon={<AiOutlineLock />}
+        />
+        <InputWithIcon
+          label="Confirm Password"
+          id="confirmPassword"
+          type={showPassword ? "text" : "password"}
+          handleShowPassword={handleShowPassword}
+          placeholder={"Confirm new password"}
+          error={errors.confirmPassword}
+          errorMessage={errors.confirmPassword?.message}
+          register={register}
+          icon={<AiOutlineKey />}
+        />
         {/* Submit */}
         <div className="flex justify-end mt-5">
           <ButtonBorder
-            text="Active User"
+            text="Submit"
             isValid={isValid && !loading}
             loading={loading}
           />

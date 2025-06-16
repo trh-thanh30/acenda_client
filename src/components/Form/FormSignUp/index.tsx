@@ -11,7 +11,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
 // library
-import axios from "axios";
 import toast from "react-hot-toast";
 // types
 import { FormEmailSignUpProps } from "@/types/interface";
@@ -22,6 +21,8 @@ import PolicyAuth from "@/components/PolicyAuth";
 import InputWithIcon from "@/components/Input/InputWithIcon";
 import ButtonBorder from "@/components/Button/ButtonBorder";
 import InputOptionWithIcon from "@/components/Input/InputOptionWithIcon";
+import api from "@/lib/axios";
+import { HiOutlineUserGroup } from "react-icons/hi2";
 
 const schema = z.object({
   email: z
@@ -59,22 +60,17 @@ export default function FormSignUp({
   });
 
   const handleEmailSubmit = async (data: FormData) => {
-    const { email, password, first_name, last_name, gender, date_of_birth } =
-      data;
+    const { first_name, last_name, gender, date_of_birth, password } = data;
     try {
       setLoading(true);
-      const res = await axios.post(
-        "http://localhost:8000/v1/api/auth/register",
-        {
-          email,
-          password,
-          first_name,
-          last_name,
-          gender,
-          date_of_birth,
-        },
-        { withCredentials: true }
-      );
+      const res = await api.post("/auth/register", {
+        password,
+        email,
+        first_name,
+        last_name,
+        gender,
+        date_of_birth,
+      });
       if (res.data.status === 201) {
         if (setUserId) {
           setUserId(res.data?.id);
@@ -106,10 +102,11 @@ export default function FormSignUp({
         errorMessage={errors.email?.message}
       />
       {/* Info Field */}
-      <div className="flex items-center flex-1 gap-2">
+      <div className="flex flex-col md:flex-row  items-center flex-1 md:gap-2 gap-0">
         {/* First Name */}
         <div className="w-full">
           <InputWithIcon
+            disabled={loading}
             label="First Name"
             id="first_name"
             type="text"
@@ -124,6 +121,7 @@ export default function FormSignUp({
         {/* Last Name */}
         <div className="w-full">
           <InputWithIcon
+            disabled={loading}
             label="Last Name"
             id="last_name"
             type="text"
@@ -138,6 +136,7 @@ export default function FormSignUp({
 
       {/* Password Field */}
       <InputWithIcon
+        disabled={loading}
         label="Password"
         id="password"
         handleShowPassword={handleShowPassword}
@@ -152,11 +151,13 @@ export default function FormSignUp({
       {/* Gender Field */}
       <InputOptionWithIcon
         register={register}
+        icon={<HiOutlineUserGroup />}
         error={errors.gender}
         errorMessage={errors.gender?.message}
       />
       {/* Day of Birth */}
       <InputWithIcon
+        disabled={loading}
         label="Day of Birth"
         type="date"
         id="date_of_birth"
@@ -170,7 +171,11 @@ export default function FormSignUp({
       <PolicyAuth />
       {/* Submit */}
       <div className="flex justify-end mt-5">
-        <ButtonBorder text="Sign Up" isValid={isValid} loading={loading} />
+        <ButtonBorder
+          text="Sign Up"
+          isValid={!isValid || !loading}
+          loading={loading}
+        />
       </div>
     </form>
   );

@@ -7,10 +7,10 @@ import SignUp from "@/components/SignUp";
 export default function Page() {
   return (
     <>
-      <div className="flex flex-col p-10 mb-2 ">
+      <div className="flex flex-col md:p-10 p-4 mb-2 ">
         <Logo />
-        <div className="flex flex-col mt-10 border border-doveGray-200 rounded-md p-4">
-          <h1 className="mt-2 text-4xl text-center text-doveGray-900 font-medium">
+        <div className="flex flex-col md:mt-10 mt-8 border border-doveGray-200 rounded-md md:p-4 p-3">
+          <h1 className="mt-2 md:text-4xl text-3xl text-center text-doveGray-900 font-medium">
             Create an account
           </h1>
           <span className="text-center mt-1 text-doveGray-400 text-sm">
@@ -30,6 +30,7 @@ export default function Page() {
         </div>
       </div>
       {/* Image */}
+
       <ImageAuth />
     </>
   );

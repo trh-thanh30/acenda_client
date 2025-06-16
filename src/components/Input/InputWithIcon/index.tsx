@@ -40,15 +40,16 @@ export default function InputWithIcon({
           className={`text-sm ${error ? "text-red-500" : "text-doveGray-500"}`}>
           {label}
         </label>
-        {id === "password" && (
-          <button
-            onClick={handleShowPassword}
-            type="button"
-            className="flex items-center gap-1 text-sm text-slate-400 hover:cursor-pointer hover:text-slate-900 outline-none">
-            {showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
-            {showPassword ? "Hide" : "Show"}
-          </button>
-        )}
+        {id === "password" ||
+          (id === "confirmPassword" && (
+            <button
+              onClick={handleShowPassword}
+              type="button"
+              className="flex items-center gap-1 text-sm text-slate-400 hover:cursor-pointer hover:text-slate-900 outline-none">
+              {showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+              {showPassword ? "Hide" : "Show"}
+            </button>
+          ))}
       </div>
       <div className="relative w-full">
         <span
@@ -70,7 +71,7 @@ export default function InputWithIcon({
                     ${
                       error
                         ? "border-red-200 focus:border-red-300 placeholder:text-red-400"
-                        : "border-midnightBlue-100 disabled:border-doveGray-50 focus:border-midnightBlue-200 focus:shadow-midnightBlue-200 focus:shadow-xs placeholder:text-doveGray-400"
+                        : "border-midnightBlue-100 disabled:border-doveGray-100 disabled:bg-doveGray-100 focus:border-midnightBlue-200 focus:shadow-midnightBlue-200 focus:shadow-xs placeholder:text-doveGray-400"
                     } ${
             disabled && "cursor-not-allowed bg-doveGray-50 text-doveGray-400"
           }`}

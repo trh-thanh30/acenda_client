@@ -13,10 +13,10 @@ export default function MainLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="h-screen px-12 min-w-full">
+    <>
       <Header />
-      {children}
+      <main className="min-h-screen xl:px-12 md:px-8 px-4 ">{children}</main>
       <Footer />
-    </main>
+    </>
   );
 }

@@ -23,7 +23,7 @@ export default function SearchHotel() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex gap-2 bg-doveGray-0 pt-4 px-4 pb-8 rounded-e-md rounded-bl-md shadow-doveGray-200 shadow-2xl items-end">
+      className="flex  gap-2 bg-doveGray-0 pt-4 px-4 pb-8 rounded-e-md rounded-bl-md shadow-doveGray-200 shadow-2xl items-end">
       <div className="w-full">
         <InputWithIcon
           register={register}

@@ -3,7 +3,7 @@ import React from "react";
 
 export default function PolicyAuth() {
   return (
-    <p className="text-sm text-center text-doveGray-500 mt-5">
+    <p className="text-sm text-center text-doveGray-500 md:mt-5 mt-3">
       By continuing, I agree to Acenda{" "}
       <Link
         href="https://policies.google.com/privacy"

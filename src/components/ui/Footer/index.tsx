@@ -13,8 +13,8 @@ import masterCardIC from "@/../public/master-card.svg";
 import googlePayIC from "@/../public/google-pay.svg";
 export default function Footer() {
   return (
-    <footer className="bg-doveGray-0 -mx-12 px-12 py-5">
-      <div className="flex justify-between gap-6">
+    <footer className="bg-doveGray-0  px-12 py-5 md:mt-36 mt-20">
+      <div className="flex md:flex-row flex-col justify-between gap-6">
         {/* About */}
         <div className="h-full w-[384px]">
           <h3 className="text-base font-semibold text-midnightBlue-950">
@@ -86,13 +86,13 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <hr className="w-full mt-6 border-doveGray-200 my-8" />
+      <hr className="w-full border-doveGray-200 my-8" />
       {/* Copyright */}
-      <div className="flex items-center justify-between">
+      <div className="flex md:flex-row flex-col items-center justify-between">
         <p className="text-sm font-medium text-doveGray-500">
           Copyright @ {new Date().getFullYear()} Acenda. All Rights Reserved.
         </p>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center md:mt-0 mt-3 gap-2">
           <Image src={visaIC} alt="visa icon" />
           <Image src={paypalIC} alt="discover icon" />
           <Image src={masterCardIC} alt="master card icon" />
