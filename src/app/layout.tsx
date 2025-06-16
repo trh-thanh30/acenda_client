@@ -68,7 +68,7 @@ export default function RootLayout({
                 color: "#202C46",
                 textWrap: "nowrap",
                 maxWidth: "400px",
-                padding: "14px 20px",
+                padding: "12px 18px",
               },
             }}
           />

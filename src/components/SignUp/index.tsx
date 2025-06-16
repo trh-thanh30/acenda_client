@@ -12,7 +12,13 @@ export default function SignUp() {
   console.log(userId);
   return (
     <>
-      {step === 1 && <FormEmailSignUp setStep={setStep} setEmail={setEmail} />}
+      {step === 1 && (
+        <FormEmailSignUp
+          whatCall="signupEmail"
+          setStep={setStep}
+          setEmail={setEmail}
+        />
+      )}
 
       {step === 2 && (
         <FormSignUp setStep={setStep} email={email} setUserId={setUserId} />

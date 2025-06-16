@@ -15,6 +15,12 @@ import Link from "next/link";
 import { useState } from "react";
 import Modal from "@/components/ui/Modal";
 import ModalForgetPassword from "@/components/ui/Modal/ModalForgetPassword";
+import { useDispatch } from "react-redux";
+import api from "@/lib/axios";
+import { setCredentials } from "@/store/features/authSlice";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import ModalActiveAccount from "@/components/ui/Modal/ModalActiveAccount";
 
 const schema = z.object({
   email: z
@@ -36,12 +42,41 @@ export default function FormSignIn() {
   } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
-
-  const onSubmit = (data: FormData) => {
-    console.log(data);
-  };
+  const [loading, setLoading] = useState<boolean>(false);
+  const [isActiveOpen, setIsActiveOpen] = useState<boolean>(false);
+  const [openForgetPasswordModal, setOpenForgetPasswordModal] =
+    useState<boolean>(false);
+  const [openActiveModal, setOpenActiveModal] = useState<boolean>(false);
   const { handleShowPassword, showPassword } = useShowPassword();
-  const [openModal, setOpenModal] = useState<boolean>(false);
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+  const onSubmit = async (data: FormData) => {
+    const { email, password } = data;
+    setLoading(true);
+    try {
+      const res = await api.post("/auth/login", {
+        email,
+        password,
+      });
+      const { access_token, user } = res.data;
+      dispatch(setCredentials({ accessToken: access_token, user }));
+      if (res.status === 201) {
+        toast.success(res.data?.message);
+        router.push("/");
+        setLoading(false);
+      }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      toast.error(error.response.data.message);
+      setIsActiveOpen(false);
+      setLoading(false);
+      if (error.response.data.message === "Account is not active") {
+        setIsActiveOpen(true);
+      }
+    }
+  };
+
   return (
     <>
       <div key="form" className="flex flex-col md:p-10 p-4 mb-2">
@@ -84,20 +119,42 @@ export default function FormSignIn() {
 
             <PolicyAuth />
             <div className="flex items-center gap-4  justify-center w-full mt-4">
-              <ButtonBorder text="Sign In" isValid={true} />
+              <ButtonBorder loading={loading} text="Sign In" isValid={true} />
             </div>
           </form>
+
+          {/* Forget password */}
           <button
-            onClick={() => setOpenModal(true)}
+            onClick={() => setOpenForgetPasswordModal(true)}
             className="text-sm whitespace-nowrap mt-2 text-center hover:underline py-1 hover:cursor-pointer">
             Forget your password
           </button>
+          {/* Modal forget password */}
           <Modal
-            isOpen={openModal}
-            close={() => setOpenModal(false)}
+            isOpen={openForgetPasswordModal}
+            close={() => setOpenForgetPasswordModal(false)}
             titleModal="Forgot password?">
             <ModalForgetPassword />
           </Modal>
+
+          {/* Active Account */}
+          {isActiveOpen && (
+            <div className="flex items-center justify-center">
+              <button
+                onClick={() => setOpenActiveModal(true)}
+                className="text-sm whitespace-nowrap mt-2 text-center w-fit text-primary-500 bg-primary-50 px-4 py-2 hover:cursor-pointer">
+                Active your account
+              </button>
+            </div>
+          )}
+          {/* Modal active account */}
+          <Modal
+            isOpen={openActiveModal}
+            close={() => setOpenActiveModal(false)}
+            titleModal="Active your account">
+            <ModalActiveAccount />
+          </Modal>
+
           <p className="text-sm whitespace-nowrap md:mt-4 mt-2 text-center py-1 text-doveGray-500">
             Don&apos;t have an account yet?{" "}
             <Link

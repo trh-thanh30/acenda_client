@@ -40,16 +40,15 @@ export default function InputWithIcon({
           className={`text-sm ${error ? "text-red-500" : "text-doveGray-500"}`}>
           {label}
         </label>
-        {id === "password" ||
-          (id === "confirmPassword" && (
-            <button
-              onClick={handleShowPassword}
-              type="button"
-              className="flex items-center gap-1 text-sm text-slate-400 hover:cursor-pointer hover:text-slate-900 outline-none">
-              {showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
-              {showPassword ? "Hide" : "Show"}
-            </button>
-          ))}
+        {id === "password" && (
+          <button
+            onClick={handleShowPassword}
+            type="button"
+            className="flex items-center gap-1 text-sm text-slate-400 hover:cursor-pointer hover:text-slate-900 outline-none">
+            {showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+            {showPassword ? "Hide" : "Show"}
+          </button>
+        )}
       </div>
       <div className="relative w-full">
         <span

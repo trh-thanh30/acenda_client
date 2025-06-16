@@ -1,8 +1,8 @@
-import FormChangePassword from "@/components/Form/FormChangePassword";
+import FormActiveUser from "@/components/Form/FormActiveUser";
 import FormEmailSignUp from "@/components/Form/FormEmailSignUp";
 import React, { useState } from "react";
 
-export default function ModalForgetPassword() {
+export default function ModalActiveAccount() {
   const [step, setStep] = useState<number>(1);
   const [email, setEmail] = useState<string>("");
 
@@ -14,13 +14,13 @@ export default function ModalForgetPassword() {
       <div className="mt-4">
         {step === 1 && (
           <FormEmailSignUp
-            whatCall="forgetPassword"
+            whatCall="activeAccount"
             setStep={setStep}
             setEmail={setEmail}
           />
         )}
 
-        {step === 2 && <FormChangePassword userId={email} />}
+        {step === 2 && <FormActiveUser userId={email} />}
       </div>
     </>
   );

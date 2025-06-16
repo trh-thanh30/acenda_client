@@ -35,25 +35,32 @@ api.interceptors.response.use(
     const originalRequest = error.config as any;
 
     if (error.response?.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
-      try {
-        const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/refresh`,
-          { withCredentials: true }
-        );
+      const isLoginRequest =
+        originalRequest.url && originalRequest.url.includes("/auth/login");
+      console.log(isLoginRequest);
+      if (!isLoginRequest) {
+        originalRequest._retry = true;
+        try {
+          const res = await axios.get(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/refresh`,
+            { withCredentials: true }
+          );
 
-        const { access_token, user } = res.data;
+          const { access_token, user } = res.data;
 
-        // Cập nhật accessToken mới vào Redux
-        storeRef.dispatch(setCredentials({ accessToken: access_token, user }));
+          // Cập nhật accessToken mới vào Redux
+          storeRef.dispatch(
+            setCredentials({ accessToken: access_token, user })
+          );
 
-        // Gắn accessToken mới vào request cũ
-        originalRequest.headers.Authorization = `Bearer ${access_token}`;
+          // Gắn accessToken mới vào request cũ
+          originalRequest.headers.Authorization = `Bearer ${access_token}`;
 
-        return api(originalRequest);
-      } catch (refreshError) {
-        storeRef.dispatch(logout());
-        return Promise.reject(refreshError);
+          return api(originalRequest);
+        } catch (refreshError) {
+          storeRef.dispatch(logout());
+          return Promise.reject(refreshError);
+        }
       }
     }
 
