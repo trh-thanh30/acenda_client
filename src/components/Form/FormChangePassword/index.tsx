@@ -13,11 +13,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 // Components
 import InputWithIcon from "@/components/Input/InputWithIcon";
-import ButtonBorder from "@/components/Button/ButtonBorder";
-import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
-import api from "@/lib/axios";
+import ButtonBorder from "@/components/ui/Button/ButtonBorder";
 import useShowPassword from "@/hooks/useShowPassword";
+import api from "@/lib/axios";
+import toast from "react-hot-toast";
 
 const schema = z.object({
   id: z.string().nonempty("ID is required"),
@@ -27,10 +26,16 @@ const schema = z.object({
 });
 
 type FormData = z.infer<typeof schema>;
-export default function FormChangePassword({ userId }: { userId: string }) {
+export default function FormChangePassword({
+  userId,
+  closeModal,
+}: {
+  userId: string;
+  closeModal: () => void;
+}) {
   const [loading, setLoading] = useState<boolean>(false);
   const { handleShowPassword, showPassword } = useShowPassword();
-  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -40,9 +45,26 @@ export default function FormChangePassword({ userId }: { userId: string }) {
     mode: "onChange",
   });
   const onSubmit = async (data: FormData) => {
-    const { id, code } = data;
+    const { code, confirmPassword, id, password } = data;
+    setLoading(true);
     try {
-    } catch (error) {}
+      const res = await api.post("/auth/change-password", {
+        code,
+        id,
+        password,
+        confirmPassword,
+      });
+      if (res.status === 201) {
+        toast.success(res.data?.message);
+        setLoading(false);
+        if (closeModal) {
+          closeModal();
+        }
+      }
+    } catch (error: any) {
+      setLoading(false);
+      toast.error(error.response.data.message);
+    }
   };
   return (
     <div className="mt-2">

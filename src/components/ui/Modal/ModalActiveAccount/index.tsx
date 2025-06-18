@@ -2,10 +2,16 @@ import FormActiveUser from "@/components/Form/FormActiveUser";
 import FormEmailSignUp from "@/components/Form/FormEmailSignUp";
 import React, { useState } from "react";
 
-export default function ModalActiveAccount() {
+interface IActiveAccount {
+  emailSignIn: string;
+  close?: () => void;
+}
+export default function ModalActiveAccount({
+  emailSignIn,
+  close,
+}: IActiveAccount) {
   const [step, setStep] = useState<number>(1);
-  const [email, setEmail] = useState<string>("");
-
+  const [userId, setUserId] = useState<string>("");
   return (
     <>
       <p className="text-sm text-center text-doveGray-500 mt-1">
@@ -16,11 +22,12 @@ export default function ModalActiveAccount() {
           <FormEmailSignUp
             whatCall="activeAccount"
             setStep={setStep}
-            setEmail={setEmail}
+            userEmail={emailSignIn}
+            setUserId={setUserId}
           />
         )}
 
-        {step === 2 && <FormActiveUser userId={email} />}
+        {step === 2 && <FormActiveUser closeModal={close} userId={userId} />}
       </div>
     </>
   );

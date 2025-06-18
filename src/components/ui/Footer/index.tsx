@@ -13,20 +13,20 @@ import masterCardIC from "@/../public/master-card.svg";
 import googlePayIC from "@/../public/google-pay.svg";
 export default function Footer() {
   return (
-    <footer className="bg-doveGray-0  px-12 py-5 md:mt-36 mt-20">
+    <footer className="bg-doveGray-0  md:px-12 px-8 py-5 md:mt-36 mt-20">
       <div className="flex md:flex-row flex-col justify-between gap-6">
         {/* About */}
-        <div className="h-full w-[384px]">
+        <div className="h-full md:w-[384px] w-full">
           <h3 className="text-base font-semibold text-midnightBlue-950">
             About Us
           </h3>
-          <p className="text-sm text-doveGray-500 mt-2">
+          <p className="text-sm  text-doveGray-500 mt-2">
             As expected of a travel expert, Acenda-Travel.com will help you not
             miss any great things in your trip. We choose for you suitable
             hotels, special tours, detailed travel information with attractive
             prices
           </p>
-          <div className="flex items-center gap-1 mt-6">
+          <div className="flex md:flex-row flex-col md:items-center items-start gap-1 md:mt-6 mt-3">
             <Image src={logoDK} alt="logo" />
             <Image src={logoTB} alt="logo" />
           </div>
@@ -74,25 +74,26 @@ export default function Footer() {
               <span>1800 10 11 21</span>
             </li>
           </ul>
-          <div className="mt-4">
+          <div className="mt-4 flex items-center">
             <input
-              className="py-2 px-4 rounded-md outline-none border border-doveGray-200 text-sm focus:border-midnightBlue-200 placeholder:text-doveGray-400 focus:shadow-midnightBlue-200 focus:shadow-2xl transition-colors"
+              name="email"
+              className="py-2 md:px-4 px-3 rounded-md outline-none border border-doveGray-200 text-sm focus:border-midnightBlue-200 placeholder:text-doveGray-400 focus:shadow-midnightBlue-200 focus:shadow-2xl transition-colors"
               placeholder="Enter your email"
               type="email"
             />
-            <button className="bg-primary-500 text-white py-2 px-4 rounded-md ml-1 hover:opacity-90 hover:cursor-pointer">
+            <button className="bg-primary-500 text-sm text-white py-2 md:px-4 px-3 rounded-md ml-1 hover:opacity-90 hover:cursor-pointer">
               Submit
             </button>
           </div>
         </div>
       </div>
-      <hr className="w-full border-doveGray-200 my-8" />
+      <hr className="w-full border-doveGray-200 md:my-8 my-6" />
       {/* Copyright */}
       <div className="flex md:flex-row flex-col items-center justify-between">
-        <p className="text-sm font-medium text-doveGray-500">
+        <p className="text-sm  font-medium text-doveGray-500">
           Copyright @ {new Date().getFullYear()} Acenda. All Rights Reserved.
         </p>
-        <div className="flex items-center md:mt-0 mt-3 gap-2">
+        <div className="grid md:grid-cols-4 grid-cols-2  items-center md:mt-0 mt-3 gap-2">
           <Image src={visaIC} alt="visa icon" />
           <Image src={paypalIC} alt="discover icon" />
           <Image src={masterCardIC} alt="master card icon" />

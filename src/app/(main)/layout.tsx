@@ -1,4 +1,5 @@
 import "@/app/globals.css";
+import ChatWidget from "@/components/ui/ChatWidget";
 import Footer from "@/components/ui/Footer";
 import Header from "@/components/ui/Header";
 import { Metadata } from "next";
@@ -15,7 +16,10 @@ export default function MainLayout({
   return (
     <>
       <Header />
-      <main className="min-h-screen xl:px-12 md:px-8 px-4 ">{children}</main>
+      <main className="min-h-screen xl:px-12 md:px-8 px-4 ">
+        {children}
+        <ChatWidget />
+      </main>
       <Footer />
     </>
   );

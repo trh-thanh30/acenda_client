@@ -19,7 +19,7 @@ import useShowPassword from "@/hooks/useShowPassword";
 // components
 import PolicyAuth from "@/components/PolicyAuth";
 import InputWithIcon from "@/components/Input/InputWithIcon";
-import ButtonBorder from "@/components/Button/ButtonBorder";
+import ButtonBorder from "@/components/ui/Button/ButtonBorder";
 import InputOptionWithIcon from "@/components/Input/InputOptionWithIcon";
 import api from "@/lib/axios";
 import { HiOutlineUserGroup } from "react-icons/hi2";

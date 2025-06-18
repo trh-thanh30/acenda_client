@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 // Components
 import InputWithIcon from "@/components/Input/InputWithIcon";
-import ButtonBorder from "@/components/Button/ButtonBorder";
+import ButtonBorder from "@/components/ui/Button/ButtonBorder";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import api from "@/lib/axios";
@@ -19,7 +19,13 @@ const schema = z.object({
 });
 
 type FormData = z.infer<typeof schema>;
-export default function FormActiveUser({ userId }: { userId: string }) {
+export default function FormActiveUser({
+  userId,
+  closeModal,
+}: {
+  userId: string;
+  closeModal?: () => void;
+}) {
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
   const {
@@ -41,6 +47,9 @@ export default function FormActiveUser({ userId }: { userId: string }) {
       if (res.status === 201) {
         toast.success(res.data?.message);
         setLoading(false);
+        if (closeModal) {
+          closeModal();
+        }
         router.push("/signin");
       }
     } catch (error: any) {

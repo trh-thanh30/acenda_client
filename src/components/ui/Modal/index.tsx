@@ -26,7 +26,9 @@ export default function Modal({
           <DialogPanel
             transition
             className="w-full max-w-md rounded-xl bg-doveGray-0 p-6 backdrop-blur-2xl duration-200 ease-out data-closed:transform-[scale(95%)] data-closed:opacity-0">
-            <div onClick={close} className="flex items-center justify-end hover:opacity-90 hover:cursor-pointer">
+            <div
+              onClick={close}
+              className="flex items-center justify-end hover:opacity-90 hover:cursor-pointer">
               <AiOutlineClose size={20} />
             </div>
             <div className="flex items-center justify-center">

@@ -8,7 +8,7 @@ import { AiOutlineLock, AiOutlineMail } from "react-icons/ai";
 import InputWithIcon from "@/components/Input/InputWithIcon";
 import useShowPassword from "@/hooks/useShowPassword";
 import PolicyAuth from "@/components/PolicyAuth";
-import ButtonBorder from "@/components/Button/ButtonBorder";
+import ButtonBorder from "@/components/ui/Button/ButtonBorder";
 import Logo from "@/components/Logo";
 import ImageAuth from "@/components/ImageAuth";
 import Link from "next/link";
@@ -43,6 +43,7 @@ export default function FormSignIn() {
     resolver: zodResolver(schema),
   });
   const [loading, setLoading] = useState<boolean>(false);
+  const [emailSignIn, setEmailSignIn] = useState<string>("");
   const [isActiveOpen, setIsActiveOpen] = useState<boolean>(false);
   const [openForgetPasswordModal, setOpenForgetPasswordModal] =
     useState<boolean>(false);
@@ -50,9 +51,9 @@ export default function FormSignIn() {
   const { handleShowPassword, showPassword } = useShowPassword();
   const router = useRouter();
   const dispatch = useDispatch();
-
   const onSubmit = async (data: FormData) => {
     const { email, password } = data;
+    setEmailSignIn(email);
     setLoading(true);
     try {
       const res = await api.post("/auth/login", {
@@ -134,7 +135,9 @@ export default function FormSignIn() {
             isOpen={openForgetPasswordModal}
             close={() => setOpenForgetPasswordModal(false)}
             titleModal="Forgot password?">
-            <ModalForgetPassword />
+            <ModalForgetPassword
+              close={() => setOpenForgetPasswordModal(false)}
+            />
           </Modal>
 
           {/* Active Account */}
@@ -152,7 +155,10 @@ export default function FormSignIn() {
             isOpen={openActiveModal}
             close={() => setOpenActiveModal(false)}
             titleModal="Active your account">
-            <ModalActiveAccount />
+            <ModalActiveAccount
+              close={() => setOpenActiveModal(false)}
+              emailSignIn={emailSignIn}
+            />
           </Modal>
 
           <p className="text-sm whitespace-nowrap md:mt-4 mt-2 text-center py-1 text-doveGray-500">

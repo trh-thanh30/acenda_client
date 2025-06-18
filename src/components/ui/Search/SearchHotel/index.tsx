@@ -8,7 +8,7 @@ import {
 } from "react-icons/hi2";
 import { LuMapPinPlus } from "react-icons/lu";
 // Components
-import ButtonPrimary from "@/components/Button/ButtonPrimary";
+import ButtonPrimary from "@/components/ui/Button/ButtonPrimary";
 import InputWithIcon from "@/components/Input/InputWithIcon";
 
 interface IFormSearchTour {

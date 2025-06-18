@@ -5,7 +5,7 @@ import { LuMapPinHouse, LuMapPinPlus } from "react-icons/lu";
 import { HiOutlineCalendarDateRange } from "react-icons/hi2";
 
 // Components
-import ButtonPrimary from "@/components/Button/ButtonPrimary";
+import ButtonPrimary from "@/components/ui/Button/ButtonPrimary";
 import InputWithIcon from "@/components/Input/InputWithIcon";
 
 interface IFormSearchTour {

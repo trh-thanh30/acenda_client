@@ -12,7 +12,7 @@ import api from "@/lib/axios";
 // components
 import PolicyAuth from "@/components/PolicyAuth";
 import InputWithIcon from "@/components/Input/InputWithIcon";
-import ButtonBorder from "@/components/Button/ButtonBorder";
+import ButtonBorder from "@/components/ui/Button/ButtonBorder";
 
 const schema = z.object({
   email: z
@@ -27,8 +27,10 @@ export default function FormEmailSignUp({
   setStep,
   setEmail,
   whatCall,
+  userEmail,
+  setUserId,
 }: FormEmailSignUpProps & {
-  setEmail: (email: string) => void;
+  setEmail?: (email: string) => void;
 }) {
   const {
     register,
@@ -39,6 +41,7 @@ export default function FormEmailSignUp({
     mode: "onChange", // Cập nhật isValid liên tục
   });
   const [loading, setLoading] = useState<boolean>(false);
+  // Submit To Handle Sign Up Email
   const handleSignUpEmail = async (data: FormData) => {
     setLoading(true);
     try {
@@ -49,7 +52,9 @@ export default function FormEmailSignUp({
       console.log(res.status);
       if (res.status === 201) {
         toast.success("Now please fill your information.");
-        setEmail(res.data?.email);
+        if (setEmail) {
+          setEmail(res.data?.email);
+        }
         setStep(2);
         setLoading(false);
       }
@@ -60,16 +65,55 @@ export default function FormEmailSignUp({
       setLoading(false);
     }
   };
+  // Submit To Handle Active Account
   const handleActiveAccount = async (data: FormData) => {
-    setStep(2);
-    setEmail(data.email);
+    const { email } = data;
+    setLoading(true);
+    try {
+      const res = await api.post("/auth/resend", {
+        email,
+      });
+      console.log(res.data);
+      if (res.status === 201) {
+        if (setUserId) {
+          setUserId(res.data?.id);
+        }
+        setLoading(false);
+        toast.success(res.data?.message);
+        setStep(2);
+      }
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+      toast.error("Something went wrong. Please try again.");
+    }
   };
+  // Submit To Handle Forget Password
   const handleForgetPassword = async (data: FormData) => {
-    setStep(2);
-    setEmail(data.email);
+    const { email } = data;
+    try {
+      setLoading(true);
+      const res = await api.post("/auth/retry-password", {
+        email,
+      });
+      if (res.status === 201) {
+        setLoading(false);
+        toast.success(res.data?.message);
+        if (setUserId) {
+          setUserId(res.data?.id);
+        }
+        setStep(2);
+      }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      setLoading(false);
+      toast.error(error.response.data.message);
+      console.log(error);
+    }
   };
   return (
     <>
+      {/* Form sign up email */}
       {whatCall === "signupEmail" && (
         <form onSubmit={handleSubmit(handleSignUpEmail)} noValidate>
           {/* Email Field */}
@@ -96,12 +140,14 @@ export default function FormEmailSignUp({
           </div>
         </form>
       )}
+      {/* Form active account */}
       {whatCall === "activeAccount" && (
         <form onSubmit={handleSubmit(handleActiveAccount)} noValidate>
           {/* Email Field */}
           <InputWithIcon
             label="Email"
-            disabled={loading}
+            value={userEmail}
+            disabled={true}
             type="email"
             id="email"
             icon={<AiOutlineMail />}
@@ -122,6 +168,7 @@ export default function FormEmailSignUp({
           </div>
         </form>
       )}
+      {/* Form forget password */}
       {whatCall === "forgetPassword" && (
         <form onSubmit={handleSubmit(handleForgetPassword)} noValidate>
           {/* Email Field */}
