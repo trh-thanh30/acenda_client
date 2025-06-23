@@ -39,12 +39,10 @@ export default function TourItem() {
             2.945.000đ
           </h6>
           <div className="md:block hidden">
-            <Link
-              className="text-primary-500 flex items-center gap-1  text-sm   text-nowrap"
-              href="/tour">
+            <span className="text-primary-500 flex items-center gap-1  text-sm   text-nowrap">
               More Details
               <RxArrowTopRight />
-            </Link>
+            </span>
           </div>
         </div>
       </div>

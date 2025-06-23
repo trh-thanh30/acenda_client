@@ -1,7 +1,11 @@
 "use client";
-import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+
+import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 // Logo Icon
 import phoneIc from "@/../public/phone.svg";
@@ -17,9 +21,12 @@ import { IoMdClose } from "react-icons/io";
 import NavLink from "../NavLink";
 import Logo from "@/components/Logo";
 import Thumbnail from "../Thumbnail";
+import Breadcrumb from "../Breadcrumb";
 
 export default function Header() {
+  const pathName = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { user } = useSelector((state: RootState) => state.auth);
   return (
     <>
       <header>
@@ -81,11 +88,25 @@ export default function Header() {
             </nav>
           </div>
           <div className="flex items-center gap-2">
-            <Link
-              href="/signup"
-              className="py-2 w-fit md:px-6 px-4 hover:cursor-pointer text-xs md:text-sm font-semibold border-midnightBlue-800 border rounded-full text-midnightBlue-800 hover:text-doveGray-0 hover:bg-midnightBlue-950">
-              Sign Up
-            </Link>
+            {user ? (
+              <Link
+                href="/profile"
+                className="hover:cursor-pointer hover:opacity-90 transition-opacity duration-300">
+                <Image
+                  src={user.avatar}
+                  alt="user-avatar"
+                  width={40}
+                  height={40}
+                  className="w-10 h-10 rounded-full hover:cursor-pointer"
+                />
+              </Link>
+            ) : (
+              <Link
+                href="/signin"
+                className="py-2 w-fit md:px-6 px-4 hover:cursor-pointer text-xs md:text-sm font-semibold border-midnightBlue-800 border rounded-full text-midnightBlue-800 hover:text-doveGray-0 hover:bg-midnightBlue-950">
+                Sign In
+              </Link>
+            )}
             <button
               onClick={() => setIsOpen(true)}
               className="md:hidden block text-lg hover:cursor-pointer text-midnightBlue-950">
@@ -99,11 +120,11 @@ export default function Header() {
         <>
           <div
             onClick={() => setIsOpen(false)}
-            className="fixed top-0 left-0 w-full h-screen bg-black opacity-50 block md:hidden"></div>
+            className="fixed top-0 left-0 w-full h-screen z-40 bg-black opacity-50 block md:hidden"></div>
         </>
       )}
       <div
-        className={`top-0 right-0 w-5/6 bg-doveGray-0 p-2  text-white fixed h-full z-40 ease-in-out duration-300 transform transition-all md:hidden block ${
+        className={`top-0 right-0 w-5/6 bg-doveGray-50 p-2 z-50   fixed h-full  ease-in-out duration-300 transform transition-all md:hidden block ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}>
         <div className="flex items-center justify-end hover:opacity-90 hover:cursor-pointer text-midnightBlue-950">
@@ -112,20 +133,41 @@ export default function Header() {
         <div className="flex items-center justify-center mb-3">
           <Logo />
         </div>
-        <div className="flex flex-col gap-1 text-midnightBlue-950 font-medium text-sm">
-          <Link
-            href="/signin"
-            className="hover:cursor-pointer hover:bg-midnightBlue-50 p-1 rounded-md">
-            Sign In
-          </Link>
-          <Link
-            href="/signup"
-            className="hover:cursor-pointer hover:bg-midnightBlue-50 p-1 rounded-md">
-            Sign Up
-          </Link>
-        </div>
+        {user ? (
+          <div className="flex items-center flex-col justify-center gap-2 mt-3">
+            <h2 className="text-midnightBlue-950 text-2xl font-medium">
+              Welcome back!
+            </h2>
+            <Link href="/profile" className="hover:cursor-pointer">
+              <Image
+                src={user.avatar}
+                width={80}
+                height={80}
+                alt="user-avatar"
+                className="rounded-full w-20 h-20 object-cover hover:cursor-pointer"
+              />
+            </Link>
+            <span className="text-sm text-doveGray-500">{user.email}</span>
+            <span className="text-sm text-midnightBlue-950">
+              {user.first_name + " " + user.last_name}
+            </span>
+          </div>
+        ) : (
+          <div className="flex flex-col gap-1 text-midnightBlue-950 font-medium text-sm">
+            <Link
+              href="/signin"
+              className="hover:cursor-pointer hover:bg-midnightBlue-50 p-1 rounded-md">
+              Sign In
+            </Link>
+            <Link
+              href="/signup"
+              className="hover:cursor-pointer hover:bg-midnightBlue-50 p-1 rounded-md">
+              Sign Up
+            </Link>
+          </div>
+        )}
         <hr className="my-4 border-doveGray-200" />
-        <nav className="flex flex-col gap-2 p-1">
+        <nav className="flex flex-col gap-5 p-1">
           <NavLink href="/">HOMEPAGE</NavLink>
           <NavLink href="/tour">TOUR</NavLink>
           <NavLink href="/hotel">HOTEL</NavLink>
@@ -133,7 +175,19 @@ export default function Header() {
           <NavLink href="/contact">CONTACT</NavLink>
         </nav>
       </div>
-      <Thumbnail />
+      {/* Thumbnail */}
+      {pathName === "/" && <Thumbnail />}
+      {pathName === "/tour" && <Thumbnail />}
+      {pathName === "/hotel" && <Thumbnail />}
+
+      {/* Breadcrumb */}
+      {pathName === "/profile" && (
+        <Breadcrumb title="Profile" navTo={[{ label: "Home", href: "/" }]} />
+      )}
+      {/* Breadcrumb */}
+      {pathName === "/contact" && (
+        <Breadcrumb title="Contact" navTo={[{ label: "Home", href: "/" }]} />
+      )}
     </>
   );
 }

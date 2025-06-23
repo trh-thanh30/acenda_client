@@ -61,7 +61,8 @@ export default function FormSignIn() {
         password,
       });
       const { access_token, user } = res.data;
-      dispatch(setCredentials({ accessToken: access_token, user }));
+
+      dispatch(setCredentials({ accessToken: access_token, user: user }));
       if (res.status === 201) {
         toast.success(res.data?.message);
         router.push("/");
@@ -120,7 +121,7 @@ export default function FormSignIn() {
 
             <PolicyAuth />
             <div className="flex items-center gap-4  justify-center w-full mt-4">
-              <ButtonBorder loading={loading} text="Sign In" isValid={true} />
+              <ButtonBorder  loading={loading} text="Sign In" isValid={true || !loading} />
             </div>
           </form>
 
