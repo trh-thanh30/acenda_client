@@ -3,6 +3,7 @@ import "./globals.css";
 import localFont from "next/font/local";
 import { Toaster } from "react-hot-toast";
 import StoreProvider from "./StoreProvider";
+
 // Import ShopeeDisplay font family
 const shopeeDisplay = localFont({
   src: [

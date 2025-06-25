@@ -5,18 +5,22 @@ interface ButtonBorderProps {
   isValid: boolean;
   loading?: boolean;
   text: string;
+  wFull?: boolean;
 }
 
 export default function ButtonPrimary({
   isValid,
   loading,
   text,
+  wFull,
 }: ButtonBorderProps) {
   return (
     <button
       type="submit"
       disabled={!isValid}
-      className={`text-base rounded-md py-2 px-8 font-medium transition-all 
+      className={`sm:text-base text-xs ${
+        wFull && "w-full"
+      } rounded-md py-2 md:px-8 px-4 font-medium transition-all 
                   ${
                     isValid
                       ? " bg-primary-500 text-primary-50 hover:shadow-primary-300 hover:opacity-90 hover:shadow-2xl hover:cursor-pointer "

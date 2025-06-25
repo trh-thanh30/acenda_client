@@ -60,6 +60,7 @@ export default function InputWithIcon({
           {icon}
         </span>
         <input
+          autoComplete="off"
           disabled={disabled}
           id={id}
           type={type}

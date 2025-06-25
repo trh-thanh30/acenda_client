@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+// tự động refesh access token nếu hết hạn khi gọi api
 import axios, { AxiosError } from "axios";
 import { AppStore } from "@/store";
 import { setCredentials, logout } from "@/store/features/authSlice";
@@ -37,11 +38,10 @@ api.interceptors.response.use(
     if (error.response?.status === 401 && !originalRequest._retry) {
       const isLoginRequest =
         originalRequest.url && originalRequest.url.includes("/auth/login");
-      console.log(isLoginRequest);
       if (!isLoginRequest) {
         originalRequest._retry = true;
         try {
-          const res = await axios.get(
+          const res = await axios.post(
             `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/refresh`,
             { withCredentials: true }
           );

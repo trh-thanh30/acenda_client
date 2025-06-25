@@ -16,7 +16,7 @@ export default function MainLayout({
   return (
     <>
       <Header />
-      <main className="min-h-screen xl:px-12 md:px-8 px-4 ">
+      <main className="min-h-screen xl:px-12 md:px-8 px-3 ">
         {children}
         <ChatWidget />
       </main>

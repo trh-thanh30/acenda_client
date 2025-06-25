@@ -1,22 +1,30 @@
 import { FieldError } from "react-hook-form";
 
 interface InputWithIconProps {
+  id?: string;
+  defaultValue?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register?: any;
   error?: FieldError;
   errorMessage?: string;
   icon?: React.ReactNode;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 export default function InputOptionWithIcon({
+  id,
   register,
   error,
   icon,
+  defaultValue,
   errorMessage,
+  value,
+  onChange,
 }: InputWithIconProps) {
   return (
-    <div className="flex flex-col gap-1 mt-4 w-full ">
-      <label htmlFor="gender" className="text-sm text-doveGray-500">
+    <div className="flex flex-col gap-1 w-full mt-4">
+      <label htmlFor="gender" className="text-sm text-midnightBlue-950">
         Gender
       </label>
       <div className="relative w-full">
@@ -29,12 +37,18 @@ export default function InputOptionWithIcon({
           {icon}
         </span>
         <select
-          id="gender"
-          {...register("gender")}
+          onChange={onChange}
+          defaultValue={defaultValue || ""}
+          value={value}
+          id={id}
+          {...(register ? register("gender") : {})}
           className={`pl-[48px] w-full border-2 rounded-md p-3 outline-none text-sm transition-colors 
-      border-doveGray-200 focus:border-midnightBlue-200 placeholder:text-doveGray-400 
-      ${error ? "border-red-200 focus:border-red-300 placeholder:text-red-400" : ""}`}
-          defaultValue="">
+      border-midnightBlue-100 focus:border-midnightBlue-200 placeholder:text-doveGray-400 
+      ${
+        error
+          ? "border-red-200 focus:border-red-300 placeholder:text-red-400"
+          : ""
+      }`}>
           <option value="" className="text-doveGray-400" disabled hidden>
             Select Gender
           </option>
