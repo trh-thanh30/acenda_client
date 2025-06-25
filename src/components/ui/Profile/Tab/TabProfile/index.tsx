@@ -2,10 +2,13 @@ import InputPrimary from "@/components/Input/InputPrimary";
 import SpinnerLarge from "@/components/Loading/SpinnerLarge";
 import ButtonBorder from "@/components/ui/Button/ButtonBorder";
 import TextareaPrimary from "@/components/ui/Textarea";
+
 import api from "@/lib/axios";
+import { updateAvatar } from "@/store/features/authSlice";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
 
 type UserInfo = {
   id?: string;
@@ -17,6 +20,7 @@ type UserInfo = {
   last_name?: string;
   date_of_birth?: string;
   address?: string;
+  role?: string;
 };
 export default function InfoTab() {
   const [loadFormData, setLoadFormData] = useState<boolean>(false);
@@ -25,6 +29,7 @@ export default function InfoTab() {
   const [infoUser, setInfoUser] = useState<UserInfo>({
     avatar: "",
   });
+  const dispatch = useDispatch();
   const ref = useRef<HTMLInputElement>(null);
   const handleChange = (
     e: React.ChangeEvent<
@@ -33,16 +38,17 @@ export default function InfoTab() {
   ) => {
     setFormData({
       ...formData,
-      [e.target.id]: e.target.value,
+      [e.target.name]: e.target.value,
     });
   };
-  const onSubmit = async (e: React.FormEvent) => {
+  const onHandleUpdateProfile = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoadFormData(true);
     try {
       const res = await api.patch(`/users/${infoUser.id}`, {
         ...formData,
       });
+      console.log(res.data);
       if (res.status === 200) {
         setLoadFormData(false);
         toast.success(res.data?.message);
@@ -68,7 +74,7 @@ export default function InfoTab() {
 
       if (res.status === 200) {
         toast.success(res.data?.message);
-
+        dispatch(updateAvatar(res.data?.url));
         // Update avatar mới
         setInfoUser((prev) => ({
           ...prev,
@@ -104,13 +110,19 @@ export default function InfoTab() {
     };
     handleFetchUserData();
   }, []);
+
   console.log(infoUser);
   return (
     <div className="md:p-5 p-0">
-      <h2 className="md:text-2xl text-xl text-midnightBlue-950 font-semibold mb-4">
-        Profile Information
-      </h2>
-      <form onSubmit={onSubmit} className="md:space-y-6 space-y-1">
+      <div className="flex items-center justify-between">
+        <h2 className="md:text-2xl text-xl text-midnightBlue-950 font-semibold mb-4">
+          Information
+        </h2>
+        <span className="p-2 bg-midnightBlue-50 text-xs font-semibold rounded-md text-midnightBlue-950">
+          {infoUser?.role}
+        </span>
+      </div>
+      <form onSubmit={onHandleUpdateProfile} className="md:space-y-6 space-y-1">
         {/* AVATAR */}
         <div className="relative flex items-center justify-center">
           {infoUser.avatar && (
@@ -134,6 +146,7 @@ export default function InfoTab() {
           )}
         </div>
         <input
+          name="avatar"
           onChange={handleUploadAvatar}
           type="file"
           ref={ref}
@@ -144,7 +157,9 @@ export default function InfoTab() {
         <div className="flex gap-2 items-center w-full md:flex-row flex-col">
           <div className="w-full">
             <InputPrimary
+              name="email"
               id="email"
+              disabled
               type="email"
               label="Email"
               defaultValue={infoUser?.email}
@@ -154,6 +169,7 @@ export default function InfoTab() {
           </div>
           <div className="w-full">
             <InputPrimary
+              name="phone_number"
               id="phone_number"
               type="tel"
               label="Phone Number"
@@ -167,6 +183,7 @@ export default function InfoTab() {
         <div className="flex gap-2 items-center w-full md:flex-row flex-col">
           <div className="w-full">
             <InputPrimary
+              name="first_name"
               id="first_name"
               type="text"
               label="First Name"
@@ -177,6 +194,7 @@ export default function InfoTab() {
           </div>
           <div className="w-full">
             <InputPrimary
+              name="last_name"
               id="last_name"
               type="text"
               label="Last Name"
@@ -194,8 +212,9 @@ export default function InfoTab() {
               Gender
             </label>
             <select
-              onChange={handleChange}
+              name="gender"
               defaultValue={infoUser?.gender}
+              onChange={handleChange}
               id="gender"
               className="w-full  border-2 rounded-md p-3 outline-none text-xs font-medium transition-colors border-midnightBlue-100 mt-1 disabled:border-doveGray-100 disabled:bg-doveGray-100 focus:border-midnightBlue-200 focus:shadow-midnightBlue-200 focus:shadow-xs placeholder:text-doveGray-400">
               <option value="" className="text-doveGray-400" disabled hidden>
@@ -207,6 +226,7 @@ export default function InfoTab() {
           </div>
           <div className="w-full">
             <InputPrimary
+              name="date_of_birth"
               id="date_of_birth"
               type="date"
               label="Date of Birth"
@@ -216,6 +236,7 @@ export default function InfoTab() {
             />
           </div>
         </div>
+
         {/* ADDRESS */}
         <label
           htmlFor="address"

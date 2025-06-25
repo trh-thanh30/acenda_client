@@ -28,7 +28,7 @@ export default function Thumbnail() {
       />
       <div
         className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col w-full items-center justify-center ${
-          pathName === "/tour" && "hidden"
+          (pathName === "/tour" || pathName === "/hotel") && "hidden"
         }`}>
         <p
           className={`md:text-2xl text-xl font-semibold text-primary-500 ${signatureFont.className}`}>
@@ -44,11 +44,11 @@ export default function Thumbnail() {
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-4/5">
         <div
           className={`relative ${pathName === "/" && "md:block hidden"} ${
-            pathName === "/tour" && "block"
+            (pathName === "/tour" || pathName === "/hotel") && "block"
           }`}>
           <div
             className={`absolute left-0 -translate-y-1/2 flex items-center text-sm font-medium ${
-              pathName === "/tour" && "hidden"
+              (pathName === "/tour" || pathName === "/hotel") && "hidden"
             }`}>
             <button
               onClick={() => setChoice("tour")}
@@ -71,8 +71,8 @@ export default function Thumbnail() {
               Hotel
             </button>
           </div>
-          {choice === "tour" && <SearchTour />}
-          {choice === "hotel" && <SearchHotel />}
+          {(choice === "tour" || pathName === "/tour") && <SearchTour />}
+          {(choice === "hotel" || pathName === "/hotel") && <SearchHotel />}
         </div>
       </div>
     </div>

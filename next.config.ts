@@ -8,6 +8,14 @@ const nextConfig: NextConfig = {
         hostname: "res.cloudinary.com",
         protocol: "https",
       },
+      {
+        hostname: "cdn.pixabay.com",
+        protocol: "https",
+      },
+      {
+        hostname: "icons.veryicon.com",
+        protocol: "https",
+      },
     ],
   },
 };

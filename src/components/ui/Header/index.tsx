@@ -31,7 +31,7 @@ export default function Header() {
   const tourId = params.tourId as string;
   return (
     <>
-      <header>
+      <header className="sticky -top-1 z-10 bg-white  transition-all duration-300">
         {/* Introduce */}
         <section className=" md:py-3 py-2 md:px-12 px-2 bg-midnightBlue-950 w-full">
           <div className="flex items-center justify-between md:flex-row flex-col">
@@ -150,9 +150,6 @@ export default function Header() {
               />
             </Link>
             <span className="text-sm text-doveGray-500">{user.email}</span>
-            <span className="text-sm text-midnightBlue-950">
-              {user.first_name + " " + user.last_name}
-            </span>
           </div>
         ) : (
           <div className="flex flex-col gap-1 text-midnightBlue-950 font-medium text-sm">

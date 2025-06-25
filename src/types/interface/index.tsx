@@ -6,6 +6,7 @@ export interface FormEmailSignUpProps {
 }
 export interface IUSER {
   id: string;
+  gmail: string;
   first_name: string;
   last_name: string;
   email: string;

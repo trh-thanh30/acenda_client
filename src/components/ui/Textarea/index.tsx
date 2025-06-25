@@ -6,16 +6,19 @@ export default function TextareaPrimary({
   placeholder,
   onChange,
   defaultValue,
+  value,
 }: {
   id?: string;
   name: string;
   placeholder?: string;
   defaultValue?: string;
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  value?: string;
 }) {
   return (
     <Textarea
       id={id}
+      value={value}
       defaultValue={defaultValue}
       onChange={onChange}
       name={name}

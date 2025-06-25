@@ -64,12 +64,12 @@ export default function RootLayout({
               success: { duration: 3000 },
               error: { duration: 4000 },
               style: {
-                fontSize: "14px",
+                fontSize: "16px",
                 fontWeight: "500",
                 color: "#202C46",
                 textWrap: "nowrap",
                 maxWidth: "400px",
-                padding: "12px 18px",
+                padding: "12px 20px",
               },
             }}
           />

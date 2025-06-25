@@ -1,4 +1,5 @@
 import "@/app/globals.css";
+import ScrollToTop from "@/components/ScrollToTop";
 import ChatWidget from "@/components/ui/ChatWidget";
 import Footer from "@/components/ui/Footer";
 import Header from "@/components/ui/Header";
@@ -15,6 +16,7 @@ export default function MainLayout({
 }>) {
   return (
     <>
+      <ScrollToTop />
       <Header />
       <main className="min-h-screen xl:px-12 md:px-8 px-3 ">
         {children}

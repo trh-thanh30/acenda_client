@@ -1,67 +1,44 @@
 "use client";
 import React from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
 
-import {
-  HiOutlineCalendarDateRange,
-  HiOutlineUserGroup,
-} from "react-icons/hi2";
-import { LuMapPinPlus } from "react-icons/lu";
 // Components
 import ButtonPrimary from "@/components/ui/Button/ButtonPrimary";
-import InputWithIcon from "@/components/Input/InputWithIcon";
+import { usePathname } from "next/navigation";
+import InputPrimary from "@/components/Input/InputPrimary";
 
-interface IFormSearchTour {
-  depart_from: string;
-  arrive_to: string;
-  departure_date: Date;
-  return_date: Date;
-}
 export default function SearchHotel() {
-  const { register, handleSubmit } = useForm<IFormSearchTour>();
-  const onSubmit: SubmitHandler<IFormSearchTour> = (data) => console.log(data);
+  const pathName = usePathname();
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex  gap-2 bg-doveGray-0 pt-4 px-4 pb-8 rounded-e-md rounded-bl-md shadow-doveGray-200 shadow-2xl items-end">
-      <div className="w-full">
-        <InputWithIcon
-          register={register}
-          id="depart_from"
-          type="text"
-          label="Depart from"
-          placeholder="Enter location..."
-          icon={<LuMapPinPlus />}
-        />
-      </div>
-      <div className="w-full">
-        <InputWithIcon
-          register={register}
-          id="guests"
-          label="Guests "
-          placeholder="02 adults, 0 children"
-          icon={<HiOutlineUserGroup />}
-        />
-      </div>
-      <div className="w-full">
-        <InputWithIcon
-          register={register}
-          type="date"
-          id="check_in"
-          label="Check In"
-          icon={<HiOutlineCalendarDateRange />}
-        />
-      </div>
-      <div className="w-full">
-        <InputWithIcon
-          register={register}
-          id="check_out"
-          label="Check Out"
-          type="date"
-          icon={<HiOutlineCalendarDateRange />}
-        />
-      </div>
-      <ButtonPrimary isValid={true} text="Search" />
-    </form>
+    <div
+      className={`${pathName === "/hotel" && "block"} ${
+        pathName === "/" && "md:block hidden"
+      } `}>
+      <form className="flex lg:flex-row flex-col  gap-2 bg-doveGray-0 pt-4 px-4 pb-8 rounded-e-md rounded-bl-md shadow-doveGray-200 shadow-2xl items-end">
+        <div className="flex items-center flex-row gap-2 w-full">
+          <div className="w-full flex-1">
+            <InputPrimary
+              id="depart_from"
+              type="text"
+              label="Depart from"
+              placeholder="Enter location..."
+            />
+          </div>
+          <div className="w-full flex-1">
+            <InputPrimary
+              id="guests"
+              label="Guests "
+              placeholder="02 adults, 0 children"
+            />
+          </div>
+        </div>
+        <div className="w-full flex-1">
+          <InputPrimary type="date" id="check_in" label="Check In" />
+        </div>
+        <div className="w-full flex-1">
+          <InputPrimary id="check_out" label="Check Out" type="date" />
+        </div>
+        <ButtonPrimary isValid={true} text="Search" />
+      </form>
+    </div>
   );
 }
