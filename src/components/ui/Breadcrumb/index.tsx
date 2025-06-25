@@ -22,7 +22,7 @@ export default function Breadcrumb({ title, navTo }: BreadcrumbProps) {
       <div className="absolute top-0 left-0 w-full h-full bg-black/50 flex items-center justify-center">
         <h1 className="text-white text-3xl font-bold uppercase">{title}</h1>
         <div className="absolute md:bottom-14 bottom-13  left-1/2 transform -translate-x-1/2  text-white">
-          <nav className="flex items-center space-x-2 md:text-base text-sm font-medium">
+          <nav className="flex items-center space-x-2 md:text-base text-xs font-medium text-nowrap">
             {navTo.map((item, index) => (
               <React.Fragment key={index}>
                 <Link
@@ -31,13 +31,13 @@ export default function Breadcrumb({ title, navTo }: BreadcrumbProps) {
                   {item.label}
                 </Link>
                 {index < navTo.length - 1 && (
-                  <span className="text-doveGray-200 text-sm">
+                  <span className="text-doveGray-200 text-xs">
                     <FaAngleRight />
                   </span>
                 )}
               </React.Fragment>
             ))}
-            <span className="text-doveGray-200 text-sm">
+            <span className="text-doveGray-200 text-xs">
               <FaAngleRight />
             </span>
             <span className="text-primary-500">{title}</span>

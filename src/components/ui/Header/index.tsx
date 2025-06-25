@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { useState } from "react";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 
@@ -25,8 +25,10 @@ import Breadcrumb from "../Breadcrumb";
 
 export default function Header() {
   const pathName = usePathname();
+  const params = useParams();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { user } = useSelector((state: RootState) => state.auth);
+  const tourId = params.tourId as string;
   return (
     <>
       <header>
@@ -184,10 +186,30 @@ export default function Header() {
       {pathName === "/profile" && (
         <Breadcrumb title="Profile" navTo={[{ label: "Home", href: "/" }]} />
       )}
-      {/* Breadcrumb */}
       {pathName === "/contact" && (
         <Breadcrumb title="Contact" navTo={[{ label: "Home", href: "/" }]} />
       )}
+
+      {pathName === "/tour/search" && (
+        <Breadcrumb
+          title={`Search Tour`}
+          navTo={[
+            { label: "Home", href: "/" },
+            { label: "Tour", href: "/tour" },
+          ]}
+        />
+      )}
+
+      {pathName.startsWith("/tour/") &&
+        !pathName.startsWith("/tour/search") && (
+          <Breadcrumb
+            title={`${tourId}`}
+            navTo={[
+              { label: "Home", href: "/" },
+              { label: "Tour", href: "/tour" },
+            ]}
+          />
+        )}
     </>
   );
 }
