@@ -18,7 +18,7 @@ export default function MainLayout({
     <>
       <ScrollToTop />
       <Header />
-      <main className="min-h-screen xl:px-12 md:px-8 px-3 ">
+      <main className="min-h-screen xl:px-12 md:px-6 px-3 ">
         {children}
         <ChatWidget />
       </main>

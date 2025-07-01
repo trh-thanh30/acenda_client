@@ -29,6 +29,7 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { user } = useSelector((state: RootState) => state.auth);
   const tourId = params.tourId as string;
+  const hotelId = params.hotelId as string;
   return (
     <>
       <header className="sticky -top-1 z-10 bg-white  transition-all duration-300">
@@ -183,6 +184,14 @@ export default function Header() {
       {pathName === "/profile" && (
         <Breadcrumb title="Profile" navTo={[{ label: "Home", href: "/" }]} />
       )}
+
+      {pathName === "/travel-guide" && (
+        <Breadcrumb
+          title="Travel guide"
+          navTo={[{ label: "Home", href: "/" }]}
+        />
+      )}
+
       {pathName === "/contact" && (
         <Breadcrumb title="Contact" navTo={[{ label: "Home", href: "/" }]} />
       )}
@@ -197,6 +206,16 @@ export default function Header() {
         />
       )}
 
+      {pathName === "/hotel/search" && (
+        <Breadcrumb
+          title={`Hotel Search`}
+          navTo={[
+            { label: "Home", href: "/" },
+            { label: "Hotel", href: "/hotel" },
+          ]}
+        />
+      )}
+
       {pathName.startsWith("/tour/") &&
         !pathName.startsWith("/tour/search") && (
           <Breadcrumb
@@ -204,6 +223,17 @@ export default function Header() {
             navTo={[
               { label: "Home", href: "/" },
               { label: "Tour", href: "/tour" },
+            ]}
+          />
+        )}
+
+      {pathName.startsWith("/hotel/") &&
+        !pathName.startsWith("/hotel/search") && (
+          <Breadcrumb
+            title={`${hotelId}`}
+            navTo={[
+              { label: "Home", href: "/" },
+              { label: "Hotel", href: "/hotel" },
             ]}
           />
         )}

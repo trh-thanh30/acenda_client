@@ -196,7 +196,7 @@ export default async function TourDetailPage({
                 loading="lazy"
                 src={map}
                 alt="blog"
-                className="w-full h-full object-cover rounded-md"
+                className="w-full h-full object-cover rounded-l-md"
               />
             </div>
             <div className="flex flex-col gap-3 mx-3 py-2 flex-grow">
