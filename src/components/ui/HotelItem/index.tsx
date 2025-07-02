@@ -9,7 +9,7 @@ import Link from "next/link";
 
 export default function HotelItem() {
   return (
-    <Link href="/hotel" className="w-full h-full relative">
+    <Link href="/hotel/2" className="w-full h-full relative">
       <Image
         src={hotelIMG}
         alt="tour image"

@@ -9,6 +9,7 @@ import { HiOutlineCalendarDateRange } from "react-icons/hi2";
 import { TiTickOutline } from "react-icons/ti";
 import ButtonPrimary from "@/components/ui/Button/ButtonPrimary";
 import RoomHotel from "./components/RoomHotel";
+import Link from "next/link";
 const amenities = [
   "Internet miễn phí",
   "Bữa sáng tại phòng",
@@ -148,7 +149,7 @@ export default async function HotelDetailPage({
             <span>Th4, 28/06 </span>
           </div>
           <hr className="border border-doveGray-200 w-full my-4" />
-          <div className="flex flex-col gap-4 text-sm text-doveGray-500">
+          <div className="flex mb-4 flex-col gap-4 text-sm text-doveGray-500">
             <span className="flex items-center gap-1">
               <TiTickOutline />
               Good price, exclusive offer
@@ -158,9 +159,9 @@ export default async function HotelDetailPage({
               24/7 support, service from the heart
             </span>
           </div>
-          <div className="mt-4">
+          <Link href={`/hotel/${hotelId}/payment`}>
             <ButtonPrimary isValid text="Book now" wFull />
-          </div>
+          </Link>
         </div>
         <hr className="border border-doveGray-100 my-6" />
       </div>

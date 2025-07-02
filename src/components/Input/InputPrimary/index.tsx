@@ -25,7 +25,7 @@ export default function InputPrimary({
   disabled,
 }: InputPrimaryProps) {
   return (
-    <>
+    <div className="space-y-1 w-full">
       <label className="text-sm font-medium text-midnightBlue-950" htmlFor={id}>
         {label}
       </label>
@@ -42,6 +42,6 @@ export default function InputPrimary({
         placeholder={placeholder}
         className="w-full  border-2 rounded-md p-2 outline-none text-sm transition-colors border-midnightBlue-100 mt-1 disabled:border-doveGray-100 disabled:bg-doveGray-100 disabled:text-doveGray-400 focus:border-midnightBlue-200 focus:shadow-midnightBlue-200 focus:shadow-xs placeholder:text-doveGray-400"
       />
-    </>
+    </div>
   );
 }
