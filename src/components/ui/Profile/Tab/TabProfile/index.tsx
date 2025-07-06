@@ -41,6 +41,7 @@ export default function InfoTab() {
       [e.target.name]: e.target.value,
     });
   };
+
   const onHandleUpdateProfile = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoadFormData(true);
@@ -48,7 +49,7 @@ export default function InfoTab() {
       const res = await api.patch(`/users/${infoUser.id}`, {
         ...formData,
       });
-      console.log(res.data);
+
       if (res.status === 200) {
         setLoadFormData(false);
         toast.success(res.data?.message);
@@ -111,7 +112,6 @@ export default function InfoTab() {
     handleFetchUserData();
   }, []);
 
-  console.log(infoUser);
   return (
     <div className="md:p-5 p-0">
       <div className="flex items-center justify-between">

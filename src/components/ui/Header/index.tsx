@@ -16,18 +16,23 @@ import twitterIc from "@/../public/twitter.svg";
 import facebookIc from "@/../public/facebook.svg";
 import { RiMenu3Fill } from "react-icons/ri";
 import { IoMdClose } from "react-icons/io";
+import { CiBoxList, CiHeart, CiUser } from "react-icons/ci";
+import { LuLogOut } from "react-icons/lu";
 
 // Components
 import NavLink from "../NavLink";
 import Logo from "@/components/Logo";
 import Thumbnail from "../Thumbnail";
 import Breadcrumb from "../Breadcrumb";
+import Modal from "../Modal";
+import ModalFavorite from "../Modal/ModalFavorite";
 
 export default function Header() {
-  const pathName = usePathname();
-  const params = useParams();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { user } = useSelector((state: RootState) => state.auth);
+  const [openModalFavorite, setOpenModalFavorite] = useState<boolean>(false);
+  const pathName = usePathname();
+  const params = useParams();
   const tourId = params.tourId as string;
   const hotelId = params.hotelId as string;
   return (
@@ -92,17 +97,63 @@ export default function Header() {
           </div>
           <div className="flex items-center gap-2">
             {user ? (
-              <Link
-                href="/profile"
-                className="hover:cursor-pointer hover:opacity-90 transition-opacity duration-300">
-                <Image
-                  src={user.avatar}
-                  alt="user-avatar"
-                  width={40}
-                  height={40}
-                  className="w-10 h-10 rounded-full hover:cursor-pointer"
-                />
-              </Link>
+              <div className="relative group">
+                <Link href="/profile?tab=info">
+                  <Image
+                    src={user.avatar}
+                    alt="user-avatar"
+                    width={40}
+                    height={40}
+                    className="w-10 h-10 rounded-full hover:cursor-pointer  hover:opacity-90 transition-opacity duration-300"
+                  />
+                </Link>
+                <div className="absolute  opacity-0 group-hover:opacity-100 right-0 transition-opacity duration-300 ease-in-out bg-doveGray-0 p-4 rounded-md z-10">
+                  <p className="text-doveGray-500 text-sm text-center">
+                    {user.email}
+                  </p>
+                  <hr className="my-4 border border-doveGray-100" />
+                  <div className="space-y-2">
+                    <Link
+                      href={"/profile?tab=info"}
+                      className="flex items-center  hover:bg-midnightBlue-50 p-2 w-[180px] rounded-md transition-colors duration-300">
+                      <CiUser className="text-midnightBlue-950" size={20} />
+                      <span className="text-sm text-midnightBlue-950 text-center w-full">
+                        My Profile
+                      </span>
+                    </Link>
+                    <button
+                      onClick={() => setOpenModalFavorite(true)}
+                      className="flex items-center  hover:bg-midnightBlue-50 cursor-pointer p-2 rounded-md transition-colors duration-300 w-full">
+                      <CiHeart className="text-midnightBlue-950" size={20} />
+                      <span className="text-sm text-midnightBlue-950 text-center w-full">
+                        My Favorite
+                      </span>
+                    </button>
+                    {/* Modal favorite  */}
+                    <Modal
+                      isOpen={openModalFavorite}
+                      close={() => setOpenModalFavorite(false)}
+                      titleModal="Saved appropriate request">
+                      <ModalFavorite
+                        close={() => setOpenModalFavorite(false)}
+                      />
+                    </Modal>
+                    <Link
+                      href={"/profile?tab=order"}
+                      className="flex items-center  hover:bg-midnightBlue-50 p-2 rounded-md transition-colors duration-300">
+                      <CiBoxList className="text-midnightBlue-950" size={20} />
+                      <span className="text-sm text-midnightBlue-950 text-center w-full">
+                        My Order
+                      </span>
+                    </Link>
+                  </div>
+                  <hr className="my-4 border border-doveGray-100" />
+                  <button className="flex items-center  hover:bg-red-50 p-2 rounded-md transition-colors duration-300 w-full cursor-pointer">
+                    <LuLogOut size={20} className="text-red-400" />
+                    <span className="text-sm text-red-400 w-full">Logout</span>
+                  </button>
+                </div>
+              </div>
             ) : (
               <Link
                 href="/signin"

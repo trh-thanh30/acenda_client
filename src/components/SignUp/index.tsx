@@ -9,7 +9,7 @@ export default function SignUp() {
   const [step, setStep] = useState<number>(1);
   const [email, setEmail] = useState<string>("");
   const [userId, setUserId] = useState<string>("");
-  console.log(userId);
+
   return (
     <>
       {step === 1 && (

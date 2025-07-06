@@ -12,9 +12,8 @@ import mediaImg from "@/../public/media.jpg";
 import professIC from "@/../public/profess.svg";
 import deversityIC from "@/../public/diversity.svg";
 import paymentIC from "@/../public/payment.svg";
-
-import TourItem from "@/components/ui/TourItem";
 import ButtonPrimary from "@/components/ui/Button/ButtonPrimary";
+import Tour from "@/components/Tour";
 
 const imgs = [
   { src: imgHL, label: "Hạ Long" },
@@ -30,7 +29,7 @@ const signatureFont = localFont({
 export default function Page() {
   return (
     <div className="md:mt-44 mt-48">
-      <h1 className="text-midnightBlue-950 md:text-3xl text-lg uppercase font-semibold">
+      <h1 className="text-midnightBlue-950 md:text-2xl text-lg uppercase font-semibold">
         Explore nearby destinations
       </h1>
       <div className="grid md:grid-cols-4 grid-cols-2 gap-4 md:mt-10 mt-8 uppercase">
@@ -60,18 +59,8 @@ export default function Page() {
           <ButtonPrimary isValid={true} text="See all tours" />
         </Link>
       </div>
-      <div className="grid xl:grid-cols-5 sm:grid-cols-3  grid-cols-2 md:gap-4 gap-3 items-center h-full mt-10">
-        <TourItem />
-        <TourItem />
-        <TourItem />
-        <TourItem />
-        <TourItem />
-        <TourItem />
-        <TourItem />
-        <TourItem />
-        <TourItem />
-        <TourItem />
-      </div>
+
+      <Tour col={5} />
 
       <div className="md:mt-20 mt-10 relative w-full">
         <Image src={mediaImg} alt="media" className="w-full  object-contain" />
@@ -107,13 +96,7 @@ export default function Page() {
             </button>
           </div>
         </div>
-        <div className="grid xl:grid-cols-5 sm:grid-cols-3  grid-cols-2 md:gap-4 gap-3 items-center h-full mt-10">
-          <TourItem />
-          <TourItem />
-          <TourItem />
-          <TourItem />
-          <TourItem />
-        </div>
+        <Tour col={5} />
       </div>
       <div className="md:mt-20 mt-10">
         <div className="flex md:items-center items-start justify-between md:flex-row flex-col">

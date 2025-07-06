@@ -2,13 +2,15 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import authReducer from "./features/authSlice";
+import wishlistReducer from "./features/wishlistSlice";
 const rootReducer = combineReducers({
   auth: authReducer,
+  wishlist: wishlistReducer,
 });
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth"], // only persist auth state
+  whitelist: ["auth", "wishlist"], // only persist auth state
 };
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const makeStore = () => {

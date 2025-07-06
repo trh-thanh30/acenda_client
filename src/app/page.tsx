@@ -1,6 +1,5 @@
 import MainLayout from "./(main)/layout";
 import Step from "@/components/ui/Step";
-import TourItem from "@/components/ui/TourItem";
 import Image from "next/image";
 
 import { RxArrowTopRight } from "react-icons/rx";
@@ -10,6 +9,7 @@ import tickYesIC from "@/../public/tick-yes.svg";
 import Link from "next/link";
 import HotelItem from "@/components/ui/HotelItem";
 import BlogItem from "@/components/ui/BlogItem";
+import Tour from "@/components/Tour";
 
 export default function Home() {
   return (
@@ -20,18 +20,7 @@ export default function Home() {
         <h4 className="md:text-3xl text-2xl text-midnightBlue-950 font-semibold uppercase">
           hot deals today
         </h4>
-        <div className="grid xl:grid-cols-5 sm:grid-cols-3  grid-cols-2 md:gap-4 gap-3 items-center h-full mt-10">
-          <TourItem />
-          <TourItem />
-          <TourItem />
-          <TourItem />
-          <TourItem />
-          <TourItem />
-          <TourItem />
-          <TourItem />
-          <TourItem />
-          <TourItem />
-        </div>
+        <Tour col={5} />
       </div>
       {/* DONE */}
       <div className="md:mt-16 mt-10 text-center">

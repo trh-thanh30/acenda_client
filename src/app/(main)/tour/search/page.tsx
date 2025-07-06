@@ -1,15 +1,17 @@
 "use client";
-import InputPrimary from "@/components/Input/InputPrimary";
-import ButtonPrimary from "@/components/ui/Button/ButtonPrimary";
-import Datepicker from "react-tailwindcss-datepicker";
 import React, { useState } from "react";
+import Datepicker from "react-tailwindcss-datepicker";
 import type { DateValueType } from "react-tailwindcss-datepicker";
 import { Range } from "react-range";
+
 import { CiStar } from "react-icons/ci";
-import TourItem from "@/components/ui/TourItem";
 import { IoFilterSharp } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
+
+import InputPrimary from "@/components/Input/InputPrimary";
+import ButtonPrimary from "@/components/ui/Button/ButtonPrimary";
 import Logo from "@/components/Logo";
+import Tour from "@/components/Tour";
 const tourTypes = [
   "Tour ngày lễ",
   "Tour trong ngày",
@@ -157,19 +159,7 @@ export default function Page() {
 
         {/* LIST SIDE */}
         <section>
-          <div className="grid xl:grid-cols-4 sm:grid-cols-3  grid-cols-2 md:gap-3 gap-2 items-center h-full">
-            <TourItem />
-            <TourItem />
-            <TourItem />
-
-            <TourItem />
-            <TourItem />
-            <TourItem />
-
-            <TourItem />
-            <TourItem />
-            <TourItem />
-          </div>
+          <Tour col={4} />
         </section>
       </div>
       {/* Mobile filter sidebar */}

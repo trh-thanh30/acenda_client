@@ -49,7 +49,7 @@ export default function FormEmailSignUp({
       const res = await api.post("/users/already-email", {
         email,
       });
-      console.log(res.status);
+
       if (res.status === 201) {
         toast.success("Now please fill your information.");
         if (setEmail) {
@@ -60,7 +60,6 @@ export default function FormEmailSignUp({
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      console.log(error);
       toast.error(error.response.data.message);
       setLoading(false);
     }
@@ -73,7 +72,7 @@ export default function FormEmailSignUp({
       const res = await api.post("/auth/resend", {
         email,
       });
-      console.log(res.data);
+
       if (res.status === 201) {
         if (setUserId) {
           setUserId(res.data?.id);
@@ -108,7 +107,6 @@ export default function FormEmailSignUp({
     } catch (error: any) {
       setLoading(false);
       toast.error(error.response.data.message);
-      console.log(error);
     }
   };
   return (
