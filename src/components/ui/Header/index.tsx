@@ -107,12 +107,12 @@ export default function Header() {
                     className="w-10 h-10 rounded-full hover:cursor-pointer  hover:opacity-90 transition-opacity duration-300"
                   />
                 </Link>
-                <div className="absolute  opacity-0 group-hover:opacity-100 right-0 transition-opacity duration-300 ease-in-out bg-doveGray-0 p-4 rounded-md z-10">
+                <div className="absolute  opacity-0 invisible group-hover:visible group-hover:opacity-100  right-0 transition-all duration-300 ease-in-out bg-doveGray-0 p-4 rounded-md z-10">
                   <p className="text-doveGray-500 text-sm text-center">
                     {user.email}
                   </p>
                   <hr className="my-4 border border-doveGray-100" />
-                  <div className="space-y-2">
+                  <div className="space-y-2 font-medium">
                     <Link
                       href={"/profile?tab=info"}
                       className="flex items-center  hover:bg-midnightBlue-50 p-2 w-[180px] rounded-md transition-colors duration-300">
@@ -134,9 +134,7 @@ export default function Header() {
                       isOpen={openModalFavorite}
                       close={() => setOpenModalFavorite(false)}
                       titleModal="Saved appropriate request">
-                      <ModalFavorite
-                        close={() => setOpenModalFavorite(false)}
-                      />
+                      <ModalFavorite />
                     </Modal>
                     <Link
                       href={"/profile?tab=order"}
@@ -150,7 +148,7 @@ export default function Header() {
                   <hr className="my-4 border border-doveGray-100" />
                   <button className="flex items-center  hover:bg-red-50 p-2 rounded-md transition-colors duration-300 w-full cursor-pointer">
                     <LuLogOut size={20} className="text-red-400" />
-                    <span className="text-sm text-red-400 w-full">Logout</span>
+                    <span className="text-sm text-red-400 w-full font-medium">Logout</span>
                   </button>
                 </div>
               </div>

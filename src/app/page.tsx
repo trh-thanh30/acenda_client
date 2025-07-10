@@ -7,9 +7,9 @@ import contactIMG from "@/../public/contact.png";
 import tickYesIC from "@/../public/tick-yes.svg";
 
 import Link from "next/link";
-import HotelItem from "@/components/ui/HotelItem";
 import BlogItem from "@/components/ui/BlogItem";
 import Tour from "@/components/Tour";
+import Hotel from "@/components/Hotel";
 
 export default function Home() {
   return (
@@ -78,24 +78,13 @@ export default function Home() {
             resort travel
           </h4>
           <Link
-            href="/tours"
+            href="/hotel"
             className="text-doveGray-0 md:text-sm text-xs bg-primary-500 py-2 md:px-6 px-3 hover:opacity-95 rounded-md flex items-center gap-1">
-            See more tours
+            See more hotels
             <RxArrowTopRight />
           </Link>
         </div>
-        <div className="grid xl:grid-cols-5 sm:grid-cols-3  grid-cols-2 md:gap-4 gap-3 items-center h-full mt-10">
-          <HotelItem />
-          <HotelItem />
-          <HotelItem />
-          <HotelItem />
-          <HotelItem />
-          <HotelItem />
-          <HotelItem />
-          <HotelItem />
-          <HotelItem />
-          <HotelItem />
-        </div>
+        <Hotel col={5} />
       </div>
 
       <div className="md:mt-16 mt-10">

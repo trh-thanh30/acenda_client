@@ -10,6 +10,8 @@ interface InputPrimaryProps {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   required?: boolean;
   defaultValue?: string;
+  min?: number | string;
+  max?: number | string;
   disabled?: boolean;
 }
 export default function InputPrimary({
@@ -19,6 +21,8 @@ export default function InputPrimary({
   placeholder,
   value,
   onChange,
+  min,
+  max,
   required,
   defaultValue,
   name,
@@ -30,12 +34,14 @@ export default function InputPrimary({
         {label}
       </label>
       <input
+        min={min}
         name={name}
         disabled={disabled}
         defaultValue={defaultValue}
         value={value}
         onChange={onChange}
         required={required}
+        max={max}
         autoComplete="off"
         type={type}
         id={id}

@@ -3,41 +3,70 @@ import React from "react";
 import { CiStar } from "react-icons/ci";
 import { FiMapPin } from "react-icons/fi";
 
-import heartIC from "@/../public/heart.svg";
-import hotelIMG from "@/../public/hotelImg.png";
 import Link from "next/link";
+import ButtonHeart from "../Button/ButtonHeart";
 
-export default function HotelItem() {
+interface Address {
+  province: string;
+  district: string;
+  [key: string]: string;
+}
+
+interface HotelItemProps {
+  id: string;
+  name: string;
+  description: string;
+  amenities: string;
+  images: string[];
+  address: Address;
+  rooms: [];
+  reviews: [];
+}
+export default function HotelItem({ hotel }: { hotel: HotelItemProps }) {
+  const priceFake = Math.random() * 100000;
+  const { province } = hotel.address;
+
   return (
-    <Link href="/hotel/2" className="w-full h-full relative">
-      <Image
-        src={hotelIMG}
-        alt="tour image"
-        className="md:h-[380px] h-[300px] w-full object-cover"
-      />
-      <button className="absolute top-3 right-3 hover:text-red-500 cursor-pointer">
-        <Image alt="heart ic" src={heartIC} />
-      </button>
-      <div className="absolute top-3 left-3 py-1 px-2 rounded-md bg-doveGray-0">
+    <div className="relative rounded-b-md w-full h-full">
+      <Link href="/hotel/2" className="w-full h-full hover:opacity-85 shadow-md transition-all duration-300">
+        {hotel && hotel.images[0] && (
+          <div className="relative group sm:w-full sm:h-full h-[260px] w-full aspect-[2/3]">
+            {hotel.images && hotel.images[0] && (
+              <Image
+                src={hotel.images[0]}
+                fill
+                loading="lazy"
+                alt="hotel image"
+                className={`object-cover rounded-md w-full h-full`}
+              />
+            )}
+          </div>
+        )}
+
+        <div className="absolute bottom-0 bg-[#70707066] w-full p-4 rounded-b-md">
+          <h6 className="text-sm text-center  text-doveGray-0 ">
+            {hotel.name}
+          </h6>
+          {hotel.address && (
+            <div className="flex items-center gap-1 mt-2">
+              <FiMapPin className="text-sm text-doveGray-0" />
+              <span className="text-sm text-doveGray-0">{province}</span>
+            </div>
+          )}
+          <hr className="my-3 border-doveGray-0" />
+          <div className="flex items-center justify-between">
+            <p className="text-sm text-doveGray-0">{priceFake.toFixed(3)}đ</p>
+            <p className="text-sm flex items-center gap-1 ">
+              <CiStar className="text-yellow-500" />
+              <span className="text-sm text-doveGray-0">5.0</span>
+            </p>
+          </div>
+        </div>
+      </Link>
+      <div className="absolute top-3 left-3 py-1 px-2 rounded-md bg-doveGray-0 ">
         <span className="text-xs text-midnightBlue-950 font-medium">10%</span>
       </div>
-      <div className="absolute bottom-0 bg-[#70707066] w-full p-4 ">
-        <h6 className="text-sm  text-doveGray-0 text-nowrap text-left">
-          Vinpearl Resort 
-        </h6>
-        <p className="flex items-center text-xs text-doveGray-0 mt-2">
-          <FiMapPin />
-          <span className="ml-1">Hanoi, Vietnam</span>
-        </p>
-        <hr className="my-3 border-doveGray-0" />
-        <div className="flex items-center justify-between">
-          <p className="text-sm text-doveGray-0">2.945.000đ</p>
-          <p className="text-sm flex items-center gap-1 ">
-            <CiStar className="text-yellow-500" />
-            <span className="text-sm text-doveGray-0">5.0</span>
-          </p>
-        </div>
-      </div>
-    </Link>
+      <ButtonHeart hotelId={hotel.id} />
+    </div>
   );
 }

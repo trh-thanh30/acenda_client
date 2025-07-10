@@ -1,6 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { wishlistApi } from "../services/wishlist.api";
 
+interface Address {
+  province: string;
+  district: string;
+  [key: string]: string;
+}
 interface IWishlist {
   id: string;
   tour: {
@@ -19,6 +25,16 @@ interface IWishlist {
     travelCostDetails: string;
     address: string;
   };
+  hotel: {
+    id: string;
+    name: string;
+    description: string;
+    amenities: string;
+    images: string[];
+    address: Address;
+    rooms: [];
+    reviews: [];
+  };
 }
 interface IWishlistState {
   items: IWishlist[];
@@ -34,13 +50,12 @@ const initialState: IWishlistState = {
 // THUNK
 export const fetchWishlist = createAsyncThunk(
   "wishlist/fetchWishlist",
-  async (_, { rejectWithValue }) => {
+  async (orderBy: string | undefined, thunkAPI) => {
     try {
-      const res = await wishlistApi.getAllWishlist();
+      const res = await wishlistApi.getAllWishlist(orderBy);
       return res.data as IWishlist[];
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
-      return rejectWithValue(
+      return thunkAPI.rejectWithValue(
         err.response?.data?.message || "Error fetching wishlist"
       );
     }
@@ -48,10 +63,11 @@ export const fetchWishlist = createAsyncThunk(
 );
 export const toggleWishlist = createAsyncThunk(
   "wishlist/toggle",
-  async (tourId: string, thunkAPI) => {
+  async (data: { tourId?: string; hotelId?: string }, thunkAPI) => {
     try {
-      await wishlistApi.toggleWishlist(tourId);
+      await wishlistApi.toggleWishlist(data.tourId, data.hotelId);
       // after that add it to wishlist
+
       thunkAPI.dispatch(fetchWishlist());
     } catch (error) {
       console.log(error);

@@ -7,6 +7,7 @@ interface ButtonBorderProps {
   text: string;
   wFull?: boolean;
   onClick?: () => void;
+  type?: "button" | "submit" | "reset";
 }
 
 export default function ButtonPrimary({
@@ -19,7 +20,6 @@ export default function ButtonPrimary({
   return (
     <button
       onClick={onClick}
-      type="submit"
       disabled={!isValid}
       className={`sm:text-base text-xs ${
         wFull && "w-full"

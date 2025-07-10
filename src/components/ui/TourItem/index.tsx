@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { CiStar } from "react-icons/ci";
+import { CiStar, CiUser } from "react-icons/ci";
 import { FaEye } from "react-icons/fa6";
 import { PiTimer } from "react-icons/pi";
 import { RxArrowTopRight } from "react-icons/rx";
@@ -69,17 +69,19 @@ export default function TourItem({ tour }: { tour: TourItemProps }) {
               {tour.priceAdult}đ
             </h6>
             <div className="md:block hidden">
-              <Link
-                href={`/tour/${tour.id}`}
-                className="text-primary-500 flex items-center gap-1 hover:underline  text-sm   text-nowrap">
+              <span className="text-primary-500 flex items-center gap-1 hover:underline  text-sm   text-nowrap">
                 More Details
                 <RxArrowTopRight />
-              </Link>
+              </span>
             </div>
           </div>
         </div>
       </Link>
       <ButtonHeart tourId={tour.id} />
+      <div className="absolute top-1 left-1 p-2 text-xs  bg-doveGray-0 rounded-md flex items-center gap-1 text-midnightBlue-950 font-semibold">
+        <CiUser />
+        <span>{tour.availableSlots}</span>
+      </div>
     </div>
   );
 }

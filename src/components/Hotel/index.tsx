@@ -1,12 +1,11 @@
 "use client";
 import React from "react";
-import TourItem from "../ui/TourItem";
-import useApiTour from "@/hooks/api/useApiTour";
 import TourItemSkeleton from "../Loading/TourLoadingSkeleton";
+import useApiHotel from "@/hooks/api/useApiHotel";
+import HotelItem from "../ui/HotelItem";
 
-export default function Tour({ col }: { col: number }) {
-  const { tours, isLoading } = useApiTour();
-
+export default function Hotel({ col }: { col: number }) {
+  const { hotels, isLoading } = useApiHotel();
   return (
     <div
       className={`${
@@ -24,8 +23,8 @@ export default function Tour({ col }: { col: number }) {
         </>
       ) : (
         <>
-          {tours.map((tour, index) => (
-            <TourItem key={index} tour={tour} />
+          {hotels.map((hotel, index) => (
+            <HotelItem key={index} hotel={hotel} />
           ))}
         </>
       )}

@@ -28,7 +28,7 @@ export default async function HotelDetailPage({
   params: Promise<{ hotelId: string }>;
 }) {
   const { hotelId } = await params;
-
+  
   return (
     <div className="md:mt-20 mt-10">
       {/* Image gallery */}
